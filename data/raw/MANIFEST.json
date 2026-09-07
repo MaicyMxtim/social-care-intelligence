@@ -1,0 +1,152 @@
+{
+  "ascof_2024_25": {
+    "bytes": 758836,
+    "description": "Measures from the Adult Social Care Outcomes Framework, England, 2024 to 2025. Table 1a carries measure 1A, the social care related quality of life score.",
+    "downloaded": "2026-09-07",
+    "filename": "ascof_england_2024_to_2025_outcome_and_demographic.ods",
+    "licence": "OGL v3.0",
+    "publisher": "Department of Health and Social Care",
+    "sha256": "29ac3836764613e016a9f76b41d26c85b1ff1928713b7e49d1ad1b4f87e3021e",
+    "url": "https://assets.publishing.service.gov.uk/media/69736b0821a2f53a6a4fd4f8/dhsc-ascof-england-2024-to-2025-outcome-and-demographic-data-23-january-2026.ods"
+  },
+  "cld_assessments_2025_09": {
+    "bytes": 553425,
+    "description": "Adult social care client level data, assessments tables, quarterly update to September 2025, corrected July 2026.",
+    "downloaded": "2026-09-07",
+    "filename": "cld_assessments_to_september_2025.ods",
+    "licence": "OGL v3.0",
+    "publisher": "Department of Health and Social Care",
+    "sha256": "ab542aaa2dd14c77b791ff1b0072af7bda5c712f2a03c6c6093108bc1c745aaf",
+    "url": "https://assets.publishing.service.gov.uk/media/6a60c5c234dfb74772f96d2f/assessments-official-statistics-in-development-data-to-september-2025-updated-july-2026.ods"
+  },
+  "cld_assessments_2025_12": {
+    "bytes": 557408,
+    "description": "Adult social care client level data, assessments tables, quarterly update to December 2025, corrected July 2026.",
+    "downloaded": "2026-09-07",
+    "filename": "cld_assessments_to_december_2025.ods",
+    "licence": "OGL v3.0",
+    "publisher": "Department of Health and Social Care",
+    "sha256": "13079f7472edda6079f74c682b209e48e95b2bcc3fc4a400d15f3c763bfa9fad",
+    "url": "https://assets.publishing.service.gov.uk/media/6a60cb4a47af652afa0c8a25/assessments-official-statistics-in-development-data-to-december-2025-updated-july-2026.ods"
+  },
+  "cld_assessments_2026_03": {
+    "bytes": 556406,
+    "description": "Adult social care client level data, assessments tables, quarterly update to March 2026.",
+    "downloaded": "2026-09-07",
+    "filename": "cld_assessments_to_march_2026.ods",
+    "licence": "OGL v3.0",
+    "publisher": "Department of Health and Social Care",
+    "sha256": "9178124c0292b577e593016d7d77b5d9dbb1cfc0bad9d559cb3c76bbd42f5eaa",
+    "url": "https://assets.publishing.service.gov.uk/media/6a4286383413112faed80e09/assessments-official-statistics-in-development-data-to-march-2026.ods.ods"
+  },
+  "cld_lts_2025_09": {
+    "bytes": 1925020,
+    "description": "Adult social care client level data, long-term support tables, quarterly update to September 2025, corrected July 2026.",
+    "downloaded": "2026-09-07",
+    "filename": "cld_long_term_support_to_september_2025.ods",
+    "licence": "OGL v3.0",
+    "publisher": "Department of Health and Social Care",
+    "sha256": "7a664a0c8ac65a02cfcf5ad0dc868efbc50451be226bd9cf5a5e13700089925d",
+    "url": "https://assets.publishing.service.gov.uk/media/6a60c4550dd52549f5f96d28/long-term-support-official-statistics-in-development-data-to-september-2025-updated-july-2026.ods"
+  },
+  "cld_lts_2025_12": {
+    "bytes": 1935103,
+    "description": "Adult social care client level data, long-term support tables, quarterly update to December 2025, corrected July 2026.",
+    "downloaded": "2026-09-07",
+    "filename": "cld_long_term_support_to_december_2025.ods",
+    "licence": "OGL v3.0",
+    "publisher": "Department of Health and Social Care",
+    "sha256": "6ae66b274891d0abda87bb7228db4206716f65258caacca89118c3ecaad6c2a8",
+    "url": "https://assets.publishing.service.gov.uk/media/6a60c91ab00f3323bf1a2431/long-term-support-official-statistics-in-development-data-to-december-2025-updated-july-2026.ods"
+  },
+  "cld_lts_2026_03": {
+    "bytes": 1926707,
+    "description": "Adult social care client level data, long-term support tables, quarterly update to March 2026. Monthly snapshots April 2025 to March 2026.",
+    "downloaded": "2026-09-07",
+    "filename": "cld_long_term_support_to_march_2026.ods",
+    "licence": "OGL v3.0",
+    "publisher": "Department of Health and Social Care",
+    "sha256": "dc1072522aec6a50d11cbe5598c61c2ad459abd486b3ee007614f3d10ebdc6ed",
+    "url": "https://assets.publishing.service.gov.uk/media/6a42854f5b6406df58c13f78/long-term-support-official-statistics-in-development-data-to-march-2026.ods.ods"
+  },
+  "dfe_cin": {
+    "bytes": 1187311,
+    "description": "Children in need census, all release files. c1 carries referrals and re-referrals, d3 carries second or subsequent child protection plans.",
+    "downloaded": "2026-09-07",
+    "filename": "dfe_children_in_need.zip",
+    "licence": "OGL v3.0",
+    "publisher": "Department for Education",
+    "sha256": "a93aab31ffc69a4ba919c3295c0ecbdaaa6ce9568f92de56b1b4085dbfff440f",
+    "url": "https://content.explore-education-statistics.service.gov.uk/api/releases/9d18dcc5-207b-43d3-c0e1-08ddff5126a0/files"
+  },
+  "dfe_cla": {
+    "bytes": 2118077,
+    "description": "Children looked after in England including adoptions, all release files. LA_CLA_placement_stability.csv carries children with three or more placements in the year.",
+    "downloaded": "2026-09-07",
+    "filename": "dfe_children_looked_after.zip",
+    "licence": "OGL v3.0",
+    "publisher": "Department for Education",
+    "sha256": "0324101714294c3eb7a09c4b4fb8a96547e812b937274e2baf39e74dbe3b8ead",
+    "url": "https://content.explore-education-statistics.service.gov.uk/api/releases/8c28aca0-6ab9-400b-b7de-c5fc7a148c2e/files"
+  },
+  "dfe_csww": {
+    "bytes": 2155734,
+    "description": "Children's social work workforce statistics, all release files. csww_indicators_2017_to_2025.csv carries turnover, vacancy, agency, caseload and sickness absence by local authority.",
+    "downloaded": "2026-09-07",
+    "filename": "dfe_childrens_social_work_workforce.zip",
+    "licence": "OGL v3.0",
+    "publisher": "Department for Education",
+    "sha256": "77559c8184d20d8da7ca25ade73b259af3d4ae7ab95b5a9d84c3698268859b2f",
+    "url": "https://content.explore-education-statistics.service.gov.uk/api/releases/54642595-7462-42ba-b565-08de4c5bcb90/files"
+  },
+  "imd_2019_file10": {
+    "bytes": 255264,
+    "description": "English indices of deprivation 2019, File 10, local authority district summaries. The IMD sheet gives the average deprivation score for each district.",
+    "downloaded": "2026-09-07",
+    "filename": "imd_2019_file_10_la_district_summaries.xlsx",
+    "licence": "OGL v3.0",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "sha256": "e4ade0ca7fa5e00e1f89b6c1ae754cd6561dd777543e04ff8a38cadea10b5366",
+    "url": "https://assets.publishing.service.gov.uk/media/5d8b3cfbe5274a08be69aa91/File_10_-_IoD2019_Local_Authority_District_Summaries__lower-tier__.xlsx"
+  },
+  "lad_boundaries_2024_05": {
+    "bytes": 1185884,
+    "description": "Local Authority Districts, May 2024, ultra generalised clipped boundaries for the United Kingdom, in GeoJSON.",
+    "downloaded": "2026-09-07",
+    "filename": "lad_may_2024_boundaries_buc.geojson",
+    "licence": "OGL v3.0",
+    "publisher": "Office for National Statistics Open Geography Portal",
+    "sha256": "51d73a8f6ac84a81ba23b07a5ca0d07f96d2e62e1b2a1ab93fc1e3ead7983f64",
+    "url": "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Local_Authority_Districts_May_2024_Boundaries_UK_BUC/FeatureServer/0/query?where=1%3D1&outFields=LAD24CD,LAD24NM&outSR=4326&f=geojson&resultRecordCount=400&resultOffset=0"
+  },
+  "ofsted_la_outcomes": {
+    "bytes": 112075,
+    "description": "Local authority inspection outcomes as at 31 March 2026. The ILACS_inspection_history sheet carries every inspection from 2018 onwards with its date and overall effectiveness grade.",
+    "downloaded": "2026-09-07",
+    "filename": "ofsted_la_inspection_outcomes_2026.ods",
+    "licence": "OGL v3.0",
+    "publisher": "Ofsted",
+    "sha256": "4ab7acad39efa3d33151270fe7076db4d8ec8b1761e45e570fb23e68f3b54b5f",
+    "url": "https://assets.publishing.service.gov.uk/media/6a6c6b2a8319ab05f7caa29d/local_authority_inspection_outcomes_as_at_31_march_2026_underlying_data.ods"
+  },
+  "ons_mye_2024": {
+    "bytes": 20385232,
+    "description": "Mid-2024 population estimates for England and Wales on 2023 local authority boundaries. The MYE2 - Persons sheet gives population by single year of age.",
+    "downloaded": "2026-09-07",
+    "filename": "ons_mid_2024_population_estimates.xlsx",
+    "licence": "OGL v3.0",
+    "publisher": "Office for National Statistics",
+    "sha256": "4d2d966c8f856623f63c04a222cb7c34f8ae396dfb2c207c8d65d4a43ed28736",
+    "url": "https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/estimatesofthepopulationforenglandandwales/mid20242023localauthorityboundaries/mye24tablesew.xlsx"
+  },
+  "sfc_local_area_2024_25": {
+    "bytes": 53630024,
+    "description": "Adult Social Care Workforce Data Set local authority area workforce estimates for 2024/25, including the vacancy rate.",
+    "downloaded": "2026-09-07",
+    "filename": "skills_for_care_local_area_2024_25.xlsx",
+    "licence": "Skills for Care, free reuse with attribution",
+    "publisher": "Skills for Care",
+    "sha256": "e14e1516fbe36107af58b01a2ba030849c5baefcecdfc62bf262dc7b015aae8d",
+    "url": "https://www.skillsforcare.org.uk/Adult-Social-Care-Workforce-Data/workforceintelligence/resources/Our-data/Current-year-data-download-local-area-2024-25.xlsx"
+  }
+}
