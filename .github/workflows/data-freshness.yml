@@ -1,0 +1,81 @@
+name: Data freshness
+
+# Every source in this repository is a published statistical release, and the
+# publishers reissue files under correction without changing the URL. This job
+# re-downloads everything each month and opens an issue when a file no longer
+# matches the hash recorded in data/raw/MANIFEST.json, so a silent revision does
+# not sit unnoticed behind the findings.
+on:
+  schedule:
+    - cron: "0 6 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-hashes:
+    name: Compare published files with the manifest
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Download every source afresh
+        run: python scripts/download.py --force
+
+      - name: Compare against the committed manifest
+        id: compare
+        run: |
+          if git diff --quiet -- data/raw/MANIFEST.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            {
+              echo 'diff<<MANIFEST_DIFF'
+              git diff -- data/raw/MANIFEST.json
+              echo 'MANIFEST_DIFF'
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open an issue when a source has changed
+        if: steps.compare.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        env:
+          MANIFEST_DIFF: ${{ steps.compare.outputs.diff }}
+        with:
+          script: |
+            const diff = process.env.MANIFEST_DIFF || '(no diff captured)';
+            const body = [
+              'A scheduled check found that at least one published source file no',
+              'longer matches the hash recorded in `data/raw/MANIFEST.json`.',
+              '',
+              'A changed hash usually means the publisher reissued the file under',
+              'correction. Re-run both projects and check whether the findings move',
+              'before committing the new manifest.',
+              '',
+              '```diff',
+              diff,
+              '```',
+            ].join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Source data changed since the last manifest (${new Date().toISOString().slice(0, 10)})`,
+              body,
+              labels: ['data'],
+            });
