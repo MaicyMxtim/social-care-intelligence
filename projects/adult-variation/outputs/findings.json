@@ -1,0 +1,190 @@
+{
+  "assess_summary": {
+    "iqr_high": 1758.0343814253927,
+    "iqr_low": 933.2560983458841,
+    "max": 2759.5091731810703,
+    "mean": 1358.567528172901,
+    "median": 1304.210661745915,
+    "min": 455.69265283230516,
+    "n": 153,
+    "ratio_max_min": 6.055636745577659
+  },
+  "assessment_window": "April 2025 to March 2026",
+  "authorities": 153,
+  "coverage": {
+    "ascof_missing": 2,
+    "vacancy_missing": 6,
+    "vacancy_missing_names": [
+      "Brent",
+      "Cumberland",
+      "Doncaster",
+      "Isles of Scilly",
+      "West Berkshire",
+      "Westmorland and Furness Council"
+    ]
+  },
+  "funnel": {
+    "assessments": {
+      "n": 153,
+      "outside_95": 16,
+      "outside_998": 3,
+      "outside_unadjusted": 139,
+      "phi": 407.1036716193652,
+      "target_rate": 1329.1639645339494
+    },
+    "support": {
+      "highest_name": "Middlesbrough",
+      "highest_rate": 2841.2861693655427,
+      "lowest_name": "Isles of Scilly",
+      "lowest_rate": 732.7796775769418,
+      "n": 153,
+      "outside_95": 17,
+      "outside_998": 1,
+      "outside_unadjusted": 125,
+      "phi": 86.71474027750429,
+      "target_rate": 1474.8772452017606
+    }
+  },
+  "inequality": {
+    "mean_rate": 1474.8772452017606,
+    "rii": 0.3709219454632563,
+    "rii_high": 0.44205470549008075,
+    "rii_low": 0.29978918543643174,
+    "significant": true,
+    "sii": 547.0643371097251,
+    "sii_high": 651.9764262616859,
+    "sii_low": 442.15224795776425
+  },
+  "model": {
+    "alpha": 0.007460158053305558,
+    "deviance_explained": 0.6363932513895456,
+    "irr": {
+      "Care workforce vacancy rate": {
+        "high": 1.0184716108033136,
+        "irr": 1.001648166997135,
+        "low": 0.9851026182824817,
+        "p": 0.8463464406227931
+      },
+      "Deprivation score": {
+        "high": 1.1827135176684833,
+        "irr": 1.1592344598350826,
+        "low": 1.1362215048647242,
+        "p": 2.776137456235842e-47
+      },
+      "Share of adults aged 65 and over": {
+        "high": 1.1096547482376669,
+        "irr": 1.0855357346607135,
+        "low": 1.0619409623550646,
+        "p": 2.4778888906685866e-13
+      }
+    },
+    "n": 147,
+    "oe_above_1_2": 9,
+    "oe_below_0_8": 3,
+    "oe_bottom_name": "City of London",
+    "oe_bottom_value": 0.6895835713360778,
+    "oe_max": 1.3649551682706385,
+    "oe_min": 0.6895835713360778,
+    "oe_top_name": "Torbay",
+    "oe_top_value": 1.3649551682706385
+  },
+  "panel": {
+    "first_month": "October 2024",
+    "last_month": "March 2026",
+    "months": 18,
+    "never": 125,
+    "persistent": 8,
+    "persistent_names": [
+      "Blackpool",
+      "Cambridgeshire",
+      "Gloucestershire",
+      "Knowsley",
+      "Lancashire",
+      "Middlesbrough",
+      "Oxfordshire",
+      "Torbay"
+    ],
+    "transient": 20
+  },
+  "rate_summary": {
+    "iqr_high": 1688.3643365856803,
+    "iqr_low": 1328.3305300383836,
+    "max": 2841.2861693655427,
+    "mean": 1516.784935361154,
+    "median": 1486.127548679833,
+    "min": 732.7796775769418,
+    "n": 153,
+    "ratio_max_min": 3.8774085257941775
+  },
+  "snapshot": "31 March 2026",
+  "sources": {
+    "ascof_2024_25": {
+      "downloaded": "2026-09-07",
+      "sha256": "29ac38367646"
+    },
+    "cld_assessments_2025_09": {
+      "downloaded": "2026-09-07",
+      "sha256": "ab542aaa2dd1"
+    },
+    "cld_assessments_2025_12": {
+      "downloaded": "2026-09-07",
+      "sha256": "13079f7472ed"
+    },
+    "cld_assessments_2026_03": {
+      "downloaded": "2026-09-07",
+      "sha256": "9178124c0292"
+    },
+    "cld_lts_2025_09": {
+      "downloaded": "2026-09-07",
+      "sha256": "7a664a0c8ac6"
+    },
+    "cld_lts_2025_12": {
+      "downloaded": "2026-09-07",
+      "sha256": "6ae66b274891"
+    },
+    "cld_lts_2026_03": {
+      "downloaded": "2026-09-07",
+      "sha256": "dc1072522aec"
+    },
+    "ctyua_boundaries_2023_12": {
+      "downloaded": "2026-09-07",
+      "sha256": "71576bc30314"
+    },
+    "dfe_cin": {
+      "downloaded": "2026-09-07",
+      "sha256": "a93aab31ffc6"
+    },
+    "dfe_cla": {
+      "downloaded": "2026-09-07",
+      "sha256": "032410171429"
+    },
+    "dfe_csww": {
+      "downloaded": "2026-09-07",
+      "sha256": "77559c8184d2"
+    },
+    "imd_2019_file10": {
+      "downloaded": "2026-09-07",
+      "sha256": "e4ade0ca7fa5"
+    },
+    "imd_2019_file11": {
+      "downloaded": "2026-09-07",
+      "sha256": "4bdbc1f2e7fc"
+    },
+    "lad_boundaries_2024_05": {
+      "downloaded": "2026-09-07",
+      "sha256": "51d73a8f6ac8"
+    },
+    "ofsted_la_outcomes": {
+      "downloaded": "2026-09-07",
+      "sha256": "4ab7acad39ef"
+    },
+    "ons_mye_2024": {
+      "downloaded": "2026-09-07",
+      "sha256": "4d2d966c8f85"
+    },
+    "sfc_local_area_2024_25": {
+      "downloaded": "2026-09-07",
+      "sha256": "e14e1516fbe3"
+    }
+  }
+}

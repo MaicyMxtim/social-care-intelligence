@@ -16,10 +16,18 @@ from __future__ import annotations
 
 import json
 import re
+import warnings
 import zipfile
 from pathlib import Path
 
 import pandas as pd
+
+# The Skills for Care workbook carries Microsoft information protection labels
+# that openpyxl does not recognise. The warning says nothing about the data, so
+# it is silenced here to keep the run output readable.
+warnings.filterwarnings(
+    "ignore", message="Unknown type for .*", category=UserWarning, module="openpyxl.*"
+)
 
 from src.geography import canonicalise
 from src.paths import raw

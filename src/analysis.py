@@ -138,25 +138,37 @@ def funnel_frame(
     for label, confidence in [("95", 0.95), ("998", 0.998)]:
         lower, upper = poisson_funnel_limits(grid, target_rate, confidence, per, phi)
         curves[label] = {"lower": lower, "upper": upper}
+    # The unadjusted limits are kept as well. Showing both makes clear how much
+    # of the spread between authorities is real rather than sampling noise.
+    raw_lower, raw_upper = poisson_funnel_limits(grid, target_rate, 0.998, per, 1.0)
+    curves["998_unadjusted"] = {"lower": raw_lower, "upper": raw_upper}
 
     point_rate = counts / populations * per
     flags = pd.DataFrame({"rate": point_rate, "population": populations})
-    for label, confidence in [("95", 0.95), ("998", 0.998)]:
+    for label, confidence, dispersion in [
+        ("95", 0.95, phi),
+        ("998", 0.998, phi),
+        ("998_unadjusted", 0.998, 1.0),
+    ]:
         lower, upper = poisson_funnel_limits(
-            populations.to_numpy(), target_rate, confidence, per, phi
+            populations.to_numpy(), target_rate, confidence, per, dispersion
         )
         flags[f"lower_{label}"] = lower
         flags[f"upper_{label}"] = upper
         flags[f"outside_{label}"] = (flags["rate"] < lower) | (flags["rate"] > upper)
 
-    # How far outside the outer limit a point sits, used to pick which
-    # authorities to label on the chart.
-    distance = np.where(
-        flags["rate"] > flags["upper_998"],
-        flags["rate"] - flags["upper_998"],
-        np.where(flags["rate"] < flags["lower_998"], flags["lower_998"] - flags["rate"], 0.0),
-    )
-    flags["distance_outside"] = distance
+    # How far outside each limit a point sits, used to pick which authorities to
+    # label on the chart.
+    for label in ["95", "998"]:
+        flags[f"distance_outside_{label}"] = np.where(
+            flags["rate"] > flags[f"upper_{label}"],
+            flags["rate"] - flags[f"upper_{label}"],
+            np.where(
+                flags["rate"] < flags[f"lower_{label}"],
+                flags[f"lower_{label}"] - flags["rate"],
+                0.0,
+            ),
+        )
 
     return {
         "target_rate": target_rate,

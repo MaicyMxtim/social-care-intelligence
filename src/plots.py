@@ -11,6 +11,7 @@ greyscale as well as in colour.
 """
 from __future__ import annotations
 
+import textwrap
 from pathlib import Path
 
 import matplotlib as mpl
@@ -91,28 +92,45 @@ def apply_house_style() -> None:
     )
 
 
-def finish(fig, axis, title: str, subtitle: str = "", source: str = "") -> None:
+def wrap(text: str, width: int = 95) -> str:
+    """Break a long line into several so it does not run past the edge of a chart."""
+    return "\n".join(textwrap.wrap(text, width=width)) if text else ""
+
+
+def finish(
+    fig, axis, title: str, subtitle: str = "", source: str = "", title_width: int = 78
+) -> None:
     """Add the title, an optional subtitle and a source note to a chart.
 
     The title carries the finding. The subtitle carries the detail that would
-    make the title too long. The source note names the publications behind the
-    chart so it can be checked.
+    make the title too long. Both are wrapped so that a long sentence stacks into
+    several lines instead of running off the side, and the subtitle is pushed far
+    enough above the axes to clear the title however many lines each of them
+    takes.
+
+    The source note names the publications behind the chart so it can be checked.
     """
-    axis.set_title(title)
-    if subtitle:
+    wrapped_title = wrap(title, title_width)
+    wrapped_subtitle = wrap(subtitle, 108)
+    subtitle_lines = wrapped_subtitle.count("\n") + 1 if wrapped_subtitle else 0
+
+    if wrapped_subtitle:
         axis.text(
             0.0,
-            1.02,
-            subtitle,
+            1.015,
+            wrapped_subtitle,
             transform=axis.transAxes,
             fontsize=9.5,
             color=MUTED,
             va="bottom",
+            linespacing=1.35,
         )
+    axis.set_title(wrapped_title, pad=16 + 12.5 * subtitle_lines)
+
     for side in ("top", "right"):
         axis.spines[side].set_visible(False)
     if source:
-        fig.text(0.0, -0.03, source, fontsize=8, color=MUTED, ha="left", va="top")
+        fig.text(0.0, -0.04, wrap(source, 130), fontsize=8, color=MUTED, ha="left", va="top")
 
 
 def save(fig, path: Path) -> Path:
@@ -134,19 +152,34 @@ def funnel_plot(
     source: str,
     path: Path,
     label_count: int = 6,
+    flag_level: str = "998",
 ) -> Path:
     """Draw a funnel plot of a rate against population size.
 
     Points inside the limits are drawn in grey, because they say nothing beyond
-    what chance would produce. Points outside the outer limit are coloured, and
-    the ones furthest outside are named.
+    what chance would produce. Points outside the limit named by flag_level are
+    coloured, and the ones furthest outside are named. Passing flag_level as
+    "95" highlights against the inner limits, which is the sensible choice when
+    the overdispersion adjustment has widened the outer limits so far that they
+    catch almost nobody.
     """
     points = funnel["points"].copy()
     points["label"] = labels.reindex(points.index)
+    flag = f"outside_{flag_level}"
+    upper = f"upper_{flag_level}"
+    lower = f"lower_{flag_level}"
+    distance = f"distance_outside_{flag_level}"
+    pretty_level = "95%" if flag_level == "95" else "99.8%"
 
     fig, axis = plt.subplots(figsize=(9, 5.6))
 
     grid = funnel["grid"]
+    if "998_unadjusted" in funnel["curves"]:
+        raw = funnel["curves"]["998_unadjusted"]
+        axis.fill_between(
+            grid, raw["lower"], raw["upper"], color=PRIMARY, alpha=0.10, lw=0, zorder=1,
+            label="99.8% limits before adjustment",
+        )
     axis.plot(
         grid, funnel["curves"]["95"]["upper"], color=LIMIT_INNER, lw=1.0, ls="--", zorder=2
     )
@@ -165,7 +198,7 @@ def funnel_plot(
         funnel["target_rate"], color=ACCENT, lw=1.2, zorder=2, label="England rate"
     )
 
-    inside = ~points["outside_998"]
+    inside = ~points[flag]
     axis.scatter(
         points.loc[inside, "population"],
         points.loc[inside, "rate"],
@@ -175,25 +208,30 @@ def funnel_plot(
         linewidths=0,
         zorder=3,
     )
-    high = points["outside_998"] & (points["rate"] > points["upper_998"])
-    low = points["outside_998"] & (points["rate"] < points["lower_998"])
+    high = points[flag] & (points["rate"] > points[upper])
+    low = points[flag] & (points["rate"] < points[lower])
     axis.scatter(
         points.loc[high, "population"], points.loc[high, "rate"],
-        s=42, color=OUTLIER_HIGH, linewidths=0, zorder=4, label="Above 99.8% limit",
+        s=42, color=OUTLIER_HIGH, linewidths=0, zorder=4,
+        label=f"Above {pretty_level} limit",
     )
     axis.scatter(
         points.loc[low, "population"], points.loc[low, "rate"],
-        s=42, color=OUTLIER_LOW, linewidths=0, zorder=4, label="Below 99.8% limit",
+        s=42, color=OUTLIER_LOW, linewidths=0, zorder=4,
+        label=f"Below {pretty_level} limit",
     )
 
-    named = points.nlargest(label_count, "distance_outside")
-    named = named[named["distance_outside"] > 0]
-    for _, row in named.iterrows():
+    named = points.nlargest(label_count, distance).sort_values("population")
+    named = named[named[distance] > 0]
+    # Alternate the label above and below its point so that neighbouring names
+    # do not print on top of each other.
+    for position, (_, row) in enumerate(named.iterrows()):
+        above = position % 2 == 0
         axis.annotate(
             str(row["label"]),
             (row["population"], row["rate"]),
             textcoords="offset points",
-            xytext=(7, 4),
+            xytext=(8, 6 if above else -12),
             fontsize=8.5,
             color=INK,
         )
@@ -202,8 +240,13 @@ def funnel_plot(
     axis.set_ylabel(y_label)
     axis.set_xscale("log")
     axis.xaxis.set_major_formatter(mpl.ticker.FuncFormatter(lambda v, _: f"{v:,.0f}"))
-    axis.set_ylim(bottom=0)
-    axis.legend(loc="upper right", ncols=2)
+    # The limit curves rise steeply for the few very small authorities. Scaling
+    # to the observed rates instead keeps the councils readable and lets the
+    # curves run off the top, which costs nothing because a curve above every
+    # point carries no information.
+    headroom = points["rate"].max() * 1.18
+    axis.set_ylim(0, headroom)
+    axis.legend(loc="lower left", ncols=2, columnspacing=1.2)
     finish(fig, axis, title, subtitle, source)
     return save(fig, path)
 
@@ -226,7 +269,7 @@ def forest_plot(
     frame = irr.copy().iloc[::-1]
     positions = np.arange(len(frame))
 
-    fig, axis = plt.subplots(figsize=(8.4, 0.52 * len(frame) + 2.4))
+    fig, axis = plt.subplots(figsize=(8.4, 0.62 * len(frame) + 2.0))
     axis.axvline(1.0, color=MUTED, lw=1.0, ls="--", zorder=1)
 
     for position, (_, row) in zip(positions, frame.iterrows()):
@@ -262,7 +305,7 @@ def choropleth(
     is how the observed to expected map is drawn so that authorities at exactly
     the expected level sit in the pale middle of the scale.
     """
-    fig, axis = plt.subplots(figsize=(6.6, 8.2))
+    fig, axis = plt.subplots(figsize=(5.4, 7.6))
 
     if diverging_at is not None:
         values = geo_frame[column].dropna()
@@ -295,14 +338,16 @@ def choropleth(
         },
     )
     axis.set_axis_off()
-    axis.set_title(title)
-    if subtitle:
+    wrapped_subtitle = wrap(subtitle, 62)
+    subtitle_lines = wrapped_subtitle.count("\n") + 1 if wrapped_subtitle else 0
+    if wrapped_subtitle:
         axis.text(
-            0.0, 1.01, subtitle, transform=axis.transAxes, fontsize=9.5,
-            color=MUTED, va="bottom",
+            0.0, 1.005, wrapped_subtitle, transform=axis.transAxes, fontsize=9.5,
+            color=MUTED, va="bottom", linespacing=1.35,
         )
+    axis.set_title(wrap(title, 56), pad=12 + 12.5 * subtitle_lines)
     if source:
-        fig.text(0.02, 0.02, source, fontsize=8, color=MUTED, ha="left")
+        fig.text(0.0, -0.01, wrap(source, 88), fontsize=8, color=MUTED, ha="left", va="top")
     return save(fig, path)
 
 

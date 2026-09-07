@@ -1,0 +1,154 @@
+la_code,months,months_outside,share_outside,la_name,status
+E10000003,18,18,1.0,Cambridgeshire,persistent
+E06000009,18,18,1.0,Blackpool,persistent
+E10000013,18,18,1.0,Gloucestershire,persistent
+E10000017,18,18,1.0,Lancashire,persistent
+E06000002,18,18,1.0,Middlesbrough,persistent
+E10000025,18,18,1.0,Oxfordshire,persistent
+E08000011,18,18,1.0,Knowsley,persistent
+E06000027,18,18,1.0,Torbay,persistent
+E10000030,18,13,0.7222222222222222,Surrey,transient
+E09000005,18,12,0.6666666666666666,Brent,transient
+E06000018,18,12,0.6666666666666666,Nottingham,transient
+E06000030,18,12,0.6666666666666666,Swindon,transient
+E08000012,18,11,0.6111111111111112,Liverpool,transient
+E08000019,18,11,0.6111111111111112,Sheffield,transient
+E10000016,18,11,0.6111111111111112,Kent,transient
+E06000008,18,9,0.5,Blackburn with Darwen,transient
+E10000015,18,8,0.4444444444444444,Hertfordshire,transient
+E10000014,18,7,0.3888888888888889,Hampshire,transient
+E06000006,18,6,0.3333333333333333,Halton,transient
+E08000015,18,6,0.3333333333333333,Wirral,transient
+E06000051,18,6,0.3333333333333333,Shropshire,transient
+E10000020,18,5,0.2777777777777778,Norfolk,transient
+E08000001,18,4,0.2222222222222222,Bolton,transient
+E06000057,18,4,0.2222222222222222,Northumberland,transient
+E10000011,18,3,0.16666666666666666,East Sussex,transient
+E10000012,18,3,0.16666666666666666,Essex,transient
+E06000040,18,1,0.05555555555555555,Windsor and Maidenhead,transient
+E08000003,18,1,0.05555555555555555,Manchester,transient
+E08000028,18,0,0.0,Sandwell,never outside
+E09000010,18,0,0.0,Enfield,never outside
+E09000009,18,0,0.0,Ealing,never outside
+E08000026,18,0,0.0,Coventry,never outside
+E09000008,18,0,0.0,Croydon,never outside
+E09000007,18,0,0.0,Camden,never outside
+E09000006,18,0,0.0,Bromley,never outside
+E08000027,18,0,0.0,Dudley,never outside
+E09000004,18,0,0.0,Bexley,never outside
+E09000003,18,0,0.0,Barnet,never outside
+E09000002,18,0,0.0,Barking and Dagenham,never outside
+E08000030,18,0,0.0,Walsall,never outside
+E09000001,18,0,0.0,City of London,never outside
+E09000011,18,0,0.0,Greenwich,never outside
+E08000037,18,0,0.0,Gateshead,never outside
+E08000036,18,0,0.0,Wakefield,never outside
+E08000035,18,0,0.0,Leeds,never outside
+E08000034,18,0,0.0,Kirklees,never outside
+E08000033,18,0,0.0,Calderdale,never outside
+E08000032,18,0,0.0,Bradford,never outside
+E08000031,18,0,0.0,Wolverhampton,never outside
+E08000029,18,0,0.0,Solihull,never outside
+E06000001,18,0,0.0,Hartlepool,never outside
+E09000020,18,0,0.0,Kensington and Chelsea,never outside
+E09000012,18,0,0.0,Hackney,never outside
+E09000013,18,0,0.0,Hammersmith and Fulham,never outside
+E10000032,18,0,0.0,West Sussex,never outside
+E10000031,18,0,0.0,Warwickshire,never outside
+E10000029,18,0,0.0,Suffolk,never outside
+E10000028,18,0,0.0,Staffordshire,never outside
+E10000024,18,0,0.0,Nottinghamshire,never outside
+E10000019,18,0,0.0,Lincolnshire,never outside
+E10000018,18,0,0.0,Leicestershire,never outside
+E10000008,18,0,0.0,Devon,never outside
+E10000007,18,0,0.0,Derbyshire,never outside
+E09000033,18,0,0.0,Westminster,never outside
+E09000032,18,0,0.0,Wandsworth,never outside
+E09000031,18,0,0.0,Waltham Forest,never outside
+E09000030,18,0,0.0,Tower Hamlets,never outside
+E09000029,18,0,0.0,Sutton,never outside
+E09000028,18,0,0.0,Southwark,never outside
+E09000027,18,0,0.0,Richmond upon Thames,never outside
+E09000026,18,0,0.0,Redbridge,never outside
+E09000025,18,0,0.0,Newham,never outside
+E09000024,18,0,0.0,Merton,never outside
+E09000023,18,0,0.0,Lewisham,never outside
+E09000022,18,0,0.0,Lambeth,never outside
+E09000021,18,0,0.0,Kingston upon Thames,never outside
+E08000024,18,0,0.0,Sunderland,never outside
+E09000019,18,0,0.0,Islington,never outside
+E09000018,18,0,0.0,Hounslow,never outside
+E09000017,18,0,0.0,Hillingdon,never outside
+E09000016,18,0,0.0,Havering,never outside
+E09000015,18,0,0.0,Harrow,never outside
+E09000014,18,0,0.0,Haringey,never outside
+E08000025,18,0,0.0,Birmingham,never outside
+E08000014,18,0,0.0,Sefton,never outside
+E08000023,18,0,0.0,South Tyneside,never outside
+E06000034,18,0,0.0,Thurrock,never outside
+E06000024,18,0,0.0,North Somerset,never outside
+E06000025,18,0,0.0,South Gloucestershire,never outside
+E06000026,18,0,0.0,Plymouth,never outside
+E06000031,18,0,0.0,Peterborough,never outside
+E06000032,18,0,0.0,Luton,never outside
+E06000033,18,0,0.0,Southend-on-Sea,never outside
+E06000035,18,0,0.0,Medway,never outside
+E08000022,18,0,0.0,North Tyneside,never outside
+E06000036,18,0,0.0,Bracknell Forest,never outside
+E06000037,18,0,0.0,West Berkshire,never outside
+E06000038,18,0,0.0,Reading,never outside
+E06000039,18,0,0.0,Slough,never outside
+E06000041,18,0,0.0,Wokingham,never outside
+E06000042,18,0,0.0,Milton Keynes,never outside
+E06000023,18,0,0.0,"Bristol, City of",never outside
+E06000022,18,0,0.0,Bath and North East Somerset,never outside
+E06000021,18,0,0.0,Stoke-on-Trent,never outside
+E06000020,18,0,0.0,Telford and Wrekin,never outside
+E06000019,18,0,0.0,"Herefordshire, County of",never outside
+E06000017,18,0,0.0,Rutland,never outside
+E06000016,18,0,0.0,Leicester,never outside
+E06000015,18,0,0.0,Derby,never outside
+E06000014,18,0,0.0,York,never outside
+E06000013,18,0,0.0,North Lincolnshire,never outside
+E06000012,18,0,0.0,North East Lincolnshire,never outside
+E06000011,18,0,0.0,East Riding of Yorkshire,never outside
+E06000010,18,0,0.0,"Kingston upon Hull, City of",never outside
+E06000007,18,0,0.0,Warrington,never outside
+E06000005,18,0,0.0,Darlington,never outside
+E06000004,18,0,0.0,Stockton-on-Tees,never outside
+E06000003,18,0,0.0,Redcar and Cleveland,never outside
+E06000043,18,0,0.0,Brighton and Hove,never outside
+E06000044,18,0,0.0,Portsmouth,never outside
+E06000045,18,0,0.0,Southampton,never outside
+E06000065,18,0,0.0,North Yorkshire,never outside
+E08000021,18,0,0.0,Newcastle upon Tyne,never outside
+E08000018,18,0,0.0,Rotherham,never outside
+E08000017,18,0,0.0,Doncaster,never outside
+E08000016,18,0,0.0,Barnsley,never outside
+E08000013,18,0,0.0,St. Helens,never outside
+E08000010,18,0,0.0,Wigan,never outside
+E08000009,18,0,0.0,Trafford,never outside
+E08000008,18,0,0.0,Tameside,never outside
+E08000007,18,0,0.0,Stockport,never outside
+E08000006,18,0,0.0,Salford,never outside
+E08000005,18,0,0.0,Rochdale,never outside
+E08000004,18,0,0.0,Oldham,never outside
+E08000002,18,0,0.0,Bury,never outside
+E06000066,18,0,0.0,Somerset,never outside
+E06000064,18,0,0.0,Westmorland and Furness Council,never outside
+E06000046,18,0,0.0,Isle of Wight,never outside
+E06000063,18,0,0.0,Cumberland,never outside
+E06000062,18,0,0.0,West Northamptonshire,never outside
+E06000061,18,0,0.0,North Northamptonshire,never outside
+E06000060,18,0,0.0,Buckinghamshire,never outside
+E06000059,18,0,0.0,Dorset,never outside
+E06000058,18,0,0.0,"Bournemouth, Christchurch and Poole",never outside
+E06000056,18,0,0.0,Central Bedfordshire,never outside
+E06000055,18,0,0.0,Bedford,never outside
+E06000054,18,0,0.0,Wiltshire,never outside
+E06000053,12,0,0.0,Isles of Scilly,never outside
+E06000052,18,0,0.0,Cornwall,never outside
+E06000050,18,0,0.0,Cheshire West and Chester,never outside
+E06000049,18,0,0.0,Cheshire East,never outside
+E06000047,18,0,0.0,County Durham,never outside
+E10000034,18,0,0.0,Worcestershire,never outside
