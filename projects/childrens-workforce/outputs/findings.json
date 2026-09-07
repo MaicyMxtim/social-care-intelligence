@@ -1,0 +1,371 @@
+{
+  "authorities": 151,
+  "authorities_per_year": {
+    "2017": 151,
+    "2018": 151,
+    "2019": 151,
+    "2020": 151,
+    "2021": 149,
+    "2022": 149,
+    "2023": 149,
+    "2024": 149,
+    "2025": 149
+  },
+  "clusters": {
+    "authorities_clustered": 139,
+    "k": 2,
+    "other_agency": 10.77,
+    "other_imd": 24.6,
+    "other_rereferral": 21.24,
+    "other_turnover": 13.51,
+    "silhouette": 0.16161874312817337,
+    "silhouette_by_k": {
+      "2": 0.16161874312817337,
+      "3": 0.1364355909828365,
+      "4": 0.10755075768056836,
+      "5": 0.08392077439599724,
+      "6": 0.0866734094468188
+    },
+    "unstable_agency": 22.86,
+    "unstable_caseload": 15.8,
+    "unstable_cluster": 1,
+    "unstable_imd": 21.28,
+    "unstable_names": [
+      "Barking and Dagenham",
+      "Barnet",
+      "Bedford",
+      "Bexley",
+      "Bournemouth, Christchurch and Poole",
+      "Bracknell Forest",
+      "Bradford",
+      "Bromley",
+      "Buckinghamshire",
+      "Bury",
+      "Cambridgeshire",
+      "Camden",
+      "Central Bedfordshire",
+      "City of London",
+      "Coventry",
+      "Croydon",
+      "Darlington",
+      "Devon",
+      "Dudley",
+      "Ealing",
+      "Enfield",
+      "Gloucestershire",
+      "Hackney",
+      "Halton",
+      "Hammersmith and Fulham",
+      "Haringey",
+      "Harrow",
+      "Havering",
+      "Herefordshire, County of",
+      "Hillingdon",
+      "Hounslow",
+      "Islington",
+      "Lambeth",
+      "Leicester",
+      "Lewisham",
+      "Luton",
+      "Medway",
+      "Merton",
+      "Middlesbrough",
+      "Newham",
+      "North Somerset",
+      "Peterborough",
+      "Reading",
+      "Redbridge",
+      "Rutland",
+      "Sandwell",
+      "Slough",
+      "Solihull",
+      "Somerset",
+      "South Gloucestershire",
+      "Southend-on-Sea",
+      "Southwark",
+      "Surrey",
+      "Swindon",
+      "Tameside",
+      "Thurrock",
+      "Torbay",
+      "Tower Hamlets",
+      "Trafford",
+      "Wakefield",
+      "Walsall",
+      "Waltham Forest",
+      "Wandsworth",
+      "West Berkshire",
+      "Windsor and Maidenhead",
+      "Wokingham"
+    ],
+    "unstable_rereferral": 20.13,
+    "unstable_size": 66,
+    "unstable_turnover": 18.19
+  },
+  "coverage": {
+    "absence_rate": 1330,
+    "agency_rate": 1335,
+    "caseload": 1344,
+    "turnover_rate": 1339,
+    "vacancy_rate": 1347
+  },
+  "cox": {
+    "authorities": 153,
+    "censored": 129,
+    "downgraded": 24,
+    "events_modelled": 23,
+    "hazard": {
+      "Agency rate, previous year": {
+        "high": 1.0240056423236013,
+        "hr": 1.000693685537546,
+        "low": 0.9779124361096663,
+        "p": 0.9529368753609629
+      },
+      "Average caseload, previous year": {
+        "high": 1.155450951219024,
+        "hr": 1.0531198298609552,
+        "low": 0.9598515409730591,
+        "p": 0.2739963005212688
+      },
+      "Deprivation score": {
+        "high": 1.0292912959966503,
+        "hr": 0.9987349820238148,
+        "low": 0.9690857857223694,
+        "p": 0.934388630478037
+      },
+      "Turnover rate, previous year": {
+        "high": 1.0434326541383718,
+        "hr": 1.0073691597015848,
+        "low": 0.9725521047219433,
+        "p": 0.6824507931796653
+      },
+      "Vacancy rate, previous year": {
+        "high": 1.0227446132537013,
+        "hr": 0.9989962781511559,
+        "low": 0.9757993841540772,
+        "p": 0.933234185018551
+      }
+    },
+    "intervals": 876,
+    "proportional_hazards": {
+      "min_p": 0.13215011103649715,
+      "terms": 5,
+      "violations": 0
+    },
+    "significant": []
+  },
+  "descriptives": {
+    "agency_last_mean": 14.750684931506848,
+    "agency_peak_mean": 19.250344827586208,
+    "agency_peak_year": 2023,
+    "agency_spread_first": 17.435268817204303,
+    "agency_spread_last": 13.526666666666664,
+    "region_high_agency": "South West",
+    "region_high_agency_value": 20.779999999999998,
+    "region_low_agency": "Yorkshire and The Humber",
+    "region_low_agency_value": 7.253333333333333,
+    "turnover_fell_everywhere": true,
+    "turnover_last_mean": 12.828082191780823,
+    "turnover_n": 147,
+    "turnover_outside_95": 11,
+    "turnover_peak_mean": 18.87142857142857,
+    "turnover_peak_year": 2022,
+    "turnover_phi": 2.395163472105722
+  },
+  "first_year": 2017,
+  "last_year": 2025,
+  "panel_regression": {
+    "repeat_cpp_rate": {
+      "entities": 151,
+      "label": "Repeat child protection plans",
+      "n": 1150,
+      "r_squared_within": 0.021852488355439403,
+      "significant": [
+        "agency_rate_lag1"
+      ],
+      "terms": {
+        "absence_rate_lag1": {
+          "coefficient": 0.009184542245265909,
+          "high": 0.2504310458489799,
+          "low": -0.23206196135844806,
+          "p": 0.9404607627490564
+        },
+        "agency_rate_lag1": {
+          "coefficient": -0.07173031226654747,
+          "high": -0.0028466682480606242,
+          "low": -0.1406139562850343,
+          "p": 0.04127134553279044
+        },
+        "caseload_lag1": {
+          "coefficient": -0.1374801107410659,
+          "high": 0.0226708183106219,
+          "low": -0.2976310397927537,
+          "p": 0.09238596461612514
+        },
+        "turnover_rate_lag1": {
+          "coefficient": -0.006147133159590285,
+          "high": 0.054110842558634055,
+          "low": -0.06640510887781463,
+          "p": 0.8413744206208991
+        },
+        "vacancy_rate_lag1": {
+          "coefficient": 0.0534557537480643,
+          "high": 0.12121101182526449,
+          "low": -0.01429950432913589,
+          "p": 0.12189010371623388
+        }
+      }
+    },
+    "rereferral_rate": {
+      "entities": 150,
+      "label": "Re-referrals within twelve months",
+      "n": 1156,
+      "r_squared_within": 0.024794765610104297,
+      "significant": [
+        "agency_rate_lag1"
+      ],
+      "terms": {
+        "absence_rate_lag1": {
+          "coefficient": -0.1439158654117827,
+          "high": 0.11440418853687567,
+          "low": -0.40223591936044106,
+          "p": 0.2745397619872483
+        },
+        "agency_rate_lag1": {
+          "coefficient": 0.09900999972608611,
+          "high": 0.16794982244285467,
+          "low": 0.030070177009317564,
+          "p": 0.00492375287011293
+        },
+        "caseload_lag1": {
+          "coefficient": -0.025441041621159913,
+          "high": 0.10891449609799007,
+          "low": -0.15979657934030989,
+          "p": 0.710282087087525
+        },
+        "turnover_rate_lag1": {
+          "coefficient": -0.007427713555293252,
+          "high": 0.03784943258308683,
+          "low": -0.052704859693673334,
+          "p": 0.7475779716581061
+        },
+        "vacancy_rate_lag1": {
+          "coefficient": -0.03060685344149902,
+          "high": 0.024663007353734306,
+          "low": -0.08587671423673235,
+          "p": 0.2774352105692983
+        }
+      }
+    },
+    "three_plus_placements_rate": {
+      "entities": 146,
+      "label": "Children with three or more placements",
+      "n": 707,
+      "r_squared_within": -0.002695332778895665,
+      "significant": [],
+      "terms": {
+        "absence_rate_lag1": {
+          "coefficient": 0.0007674230924916562,
+          "high": 0.16707725820885239,
+          "low": -0.1655424120238691,
+          "p": 0.9927713746526488
+        },
+        "agency_rate_lag1": {
+          "coefficient": -0.016683796889640935,
+          "high": 0.03588395021378672,
+          "low": -0.0692515439930686,
+          "p": 0.5332696698041941
+        },
+        "caseload_lag1": {
+          "coefficient": 0.021130188642451198,
+          "high": 0.13312139338857945,
+          "low": -0.09086101610367706,
+          "p": 0.7110678569063325
+        },
+        "turnover_rate_lag1": {
+          "coefficient": -0.019172785970349323,
+          "high": 0.0093826755016411,
+          "low": -0.04772824744233975,
+          "p": 0.18776409358024493
+        },
+        "vacancy_rate_lag1": {
+          "coefficient": 0.012324100598272035,
+          "high": 0.05873156041063954,
+          "low": -0.03408335921409547,
+          "p": 0.6021319726406418
+        }
+      }
+    }
+  },
+  "rows": 1349,
+  "sources": {
+    "ascof_2024_25": {
+      "downloaded": "2026-09-07",
+      "sha256": "29ac38367646"
+    },
+    "cld_assessments_2025_09": {
+      "downloaded": "2026-09-07",
+      "sha256": "ab542aaa2dd1"
+    },
+    "cld_assessments_2025_12": {
+      "downloaded": "2026-09-07",
+      "sha256": "13079f7472ed"
+    },
+    "cld_assessments_2026_03": {
+      "downloaded": "2026-09-07",
+      "sha256": "9178124c0292"
+    },
+    "cld_lts_2025_09": {
+      "downloaded": "2026-09-07",
+      "sha256": "7a664a0c8ac6"
+    },
+    "cld_lts_2025_12": {
+      "downloaded": "2026-09-07",
+      "sha256": "6ae66b274891"
+    },
+    "cld_lts_2026_03": {
+      "downloaded": "2026-09-07",
+      "sha256": "dc1072522aec"
+    },
+    "ctyua_boundaries_2023_12": {
+      "downloaded": "2026-09-07",
+      "sha256": "71576bc30314"
+    },
+    "dfe_cin": {
+      "downloaded": "2026-09-07",
+      "sha256": "a93aab31ffc6"
+    },
+    "dfe_cla": {
+      "downloaded": "2026-09-07",
+      "sha256": "032410171429"
+    },
+    "dfe_csww": {
+      "downloaded": "2026-09-07",
+      "sha256": "77559c8184d2"
+    },
+    "imd_2019_file10": {
+      "downloaded": "2026-09-07",
+      "sha256": "e4ade0ca7fa5"
+    },
+    "imd_2019_file11": {
+      "downloaded": "2026-09-07",
+      "sha256": "4bdbc1f2e7fc"
+    },
+    "lad_boundaries_2024_05": {
+      "downloaded": "2026-09-07",
+      "sha256": "51d73a8f6ac8"
+    },
+    "ofsted_la_outcomes": {
+      "downloaded": "2026-09-07",
+      "sha256": "4ab7acad39ef"
+    },
+    "ons_mye_2024": {
+      "downloaded": "2026-09-07",
+      "sha256": "4d2d966c8f85"
+    },
+    "sfc_local_area_2024_25": {
+      "downloaded": "2026-09-07",
+      "sha256": "e14e1516fbe3"
+    }
+  }
+}

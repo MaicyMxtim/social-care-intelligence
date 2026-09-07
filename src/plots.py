@@ -298,14 +298,26 @@ def choropleth(
     source: str,
     path: Path,
     diverging_at: float | None = None,
+    categories: dict | None = None,
 ) -> Path:
     """Draw a map of English local authorities shaded by one column.
 
     Passing a value to diverging_at centres the colour scale on that value, which
     is how the observed to expected map is drawn so that authorities at exactly
     the expected level sit in the pale middle of the scale.
+
+    Passing a dictionary to categories draws a map of groups rather than a map of
+    a measured quantity. The keys are the values in the column and the values are
+    the labels to show, and a two colour key replaces the colour bar, because a
+    continuous scale from zero to one would suggest a group membership can be
+    partial.
     """
     fig, axis = plt.subplots(figsize=(5.4, 7.6))
+
+    if categories is not None:
+        return _categorical_map(
+            fig, axis, geo_frame, column, categories, title, subtitle, source, path
+        )
 
     if diverging_at is not None:
         values = geo_frame[column].dropna()
@@ -351,6 +363,37 @@ def choropleth(
     return save(fig, path)
 
 
+def _categorical_map(
+    fig, axis, geo_frame, column: str, categories: dict, title: str, subtitle: str,
+    source: str, path: Path,
+) -> Path:
+    """Draw a map of group membership with a small key instead of a colour bar."""
+    from matplotlib.patches import Patch
+
+    palette = [PRIMARY, "#c8cfd6", SECONDARY, ACCENT, MUTED]
+    handles = []
+    for position, (value, label) in enumerate(categories.items()):
+        subset = geo_frame[geo_frame[column] == value]
+        colour = palette[position % len(palette)]
+        if not subset.empty:
+            subset.plot(ax=axis, color=colour, linewidth=0.25, edgecolor="white")
+        handles.append(Patch(facecolor=colour, edgecolor="white", label=label))
+
+    axis.set_axis_off()
+    wrapped_subtitle = wrap(subtitle, 62)
+    subtitle_lines = wrapped_subtitle.count("\n") + 1 if wrapped_subtitle else 0
+    if wrapped_subtitle:
+        axis.text(
+            0.0, 1.005, wrapped_subtitle, transform=axis.transAxes, fontsize=9.5,
+            color=MUTED, va="bottom", linespacing=1.35,
+        )
+    axis.set_title(wrap(title, 56), pad=12 + 12.5 * subtitle_lines)
+    axis.legend(handles=handles, loc="lower right", bbox_to_anchor=(1.0, 0.0))
+    if source:
+        fig.text(0.0, -0.01, wrap(source, 88), fontsize=8, color=MUTED, ha="left", va="top")
+    return save(fig, path)
+
+
 def trajectory_plot(
     frame: pd.DataFrame,
     x: str,
@@ -389,7 +432,11 @@ def trajectory_plot(
 
     axis.set_xlabel(x_label)
     axis.set_ylabel(y_label)
-    axis.set_xlim(frame[x].min(), frame[x].max() + (frame[x].max() - frame[x].min()) * 0.26)
+    first, last = frame[x].min(), frame[x].max()
+    # Leave room on the right for the end labels, but keep the ticks inside the
+    # range the data actually covers so no year is shown that has no line.
+    axis.set_xlim(first, last + (last - first) * 0.30)
+    axis.set_xticks(sorted(frame[x].dropna().unique()))
     finish(fig, axis, title, subtitle, source)
     return save(fig, path)
 

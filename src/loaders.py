@@ -29,7 +29,7 @@ warnings.filterwarnings(
     "ignore", message="Unknown type for .*", category=UserWarning, module="openpyxl.*"
 )
 
-from src.geography import canonicalise
+from src.geography import canonicalise, collapse
 from src.paths import raw
 
 # Markers that publishers use in place of a number. Treating any of these as a
@@ -301,8 +301,7 @@ def load_workforce_vacancy() -> pd.DataFrame:
         }
     )
     result = result[result["la_code"].str.match(UPPER_TIER_PATTERN, na=False)]
-    result = canonicalise(result)
-    return result.groupby("la_code", as_index=False)["vacancy_rate"].mean()
+    return collapse(canonicalise(result), keys=["la_code"])
 
 
 # --------------------------------------------------------------------------
@@ -425,8 +424,7 @@ def load_imd() -> pd.DataFrame:
     result = result[result["la_code"].str.match(UPPER_TIER_PATTERN, na=False)]
     # The 2019 indices predate five reorganisations, so county scores are
     # carried to the unitary authorities that replaced those counties.
-    result = canonicalise(result)
-    return result.groupby("la_code", as_index=False)["imd_score"].mean()
+    return collapse(canonicalise(result), keys=["la_code"])
 
 
 def load_boundaries(upper_tier: bool = True):
@@ -537,7 +535,9 @@ def load_csww_indicators() -> pd.DataFrame:
     authority rows and renames the measures to short names.
 
     Returns columns la_code, la_name, year, turnover_rate, vacancy_rate,
-    agency_rate, caseload, absence_rate and inpost_fte.
+    agency_rate, caseload, absence_rate, inpost_fte and leavers_fte. The last two
+    are counts rather than rates, and they are the numerator and denominator the
+    turnover funnel plot needs.
     """
     frame = _read_zip_member(
         "dfe_childrens_social_work_workforce.zip", "csww_indicators_2017_to_2025.csv"
@@ -554,10 +554,17 @@ def load_csww_indicators() -> pd.DataFrame:
             "caseload": to_number(frame["caseload_fte"]),
             "absence_rate": to_number(frame["absence_rate_fte"]),
             "inpost_fte": to_number(frame["inpost_fte"]),
+            "leavers_fte": to_number(frame["leavers_fte"]),
         }
     )
     result = result[result["la_code"].str.match(UPPER_TIER_PATTERN, na=False)]
-    return canonicalise(result).reset_index(drop=True)
+    collapsed = collapse(
+        canonicalise(result),
+        keys=["la_code", "year"],
+        sum_columns=["inpost_fte", "leavers_fte"],
+        weight_column="inpost_fte",
+    )
+    return collapsed.sort_values(["la_code", "year"], ignore_index=True)
 
 
 def load_rereferrals() -> pd.DataFrame:
@@ -583,8 +590,8 @@ def load_rereferrals() -> pd.DataFrame:
         }
     )
     result = result[result["la_code"].str.match(UPPER_TIER_PATTERN, na=False)]
-    result = canonicalise(result.dropna(subset=["year"]))
-    return result.reset_index(drop=True)
+    collapsed = collapse(canonicalise(result.dropna(subset=["year"])), keys=["la_code", "year"])
+    return collapsed.sort_values(["la_code", "year"], ignore_index=True)
 
 
 def load_repeat_cpp() -> pd.DataFrame:
@@ -608,8 +615,8 @@ def load_repeat_cpp() -> pd.DataFrame:
         }
     )
     result = result[result["la_code"].str.match(UPPER_TIER_PATTERN, na=False)]
-    result = canonicalise(result.dropna(subset=["year"]))
-    return result.reset_index(drop=True)
+    collapsed = collapse(canonicalise(result.dropna(subset=["year"])), keys=["la_code", "year"])
+    return collapsed.sort_values(["la_code", "year"], ignore_index=True)
 
 
 def load_placement_stability() -> pd.DataFrame:
@@ -649,8 +656,8 @@ def load_placement_stability() -> pd.DataFrame:
         }
     )
     result = result[result["la_code"].str.match(UPPER_TIER_PATTERN, na=False)]
-    result = canonicalise(result.dropna(subset=["year"]))
-    return result.reset_index(drop=True)
+    collapsed = collapse(canonicalise(result.dropna(subset=["year"])), keys=["la_code", "year"])
+    return collapsed.sort_values(["la_code", "year"], ignore_index=True)
 
 
 # Ofsted grades, ordered from best to worst. The numeric rank makes a downgrade
