@@ -46,6 +46,18 @@ LAD_BOUNDARY_URL = (
     "&resultRecordCount=400&resultOffset=0"
 )
 
+# Adult social care and children's services are run at upper tier, so the
+# choropleths need county and unitary authority boundaries rather than district
+# boundaries. December 2023 is the most recent upper tier release, and it
+# matches the boundaries the mid-2024 population estimates are published on.
+CTYUA_BOUNDARY_URL = (
+    "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/"
+    "Counties_and_Unitary_Authorities_December_2023_Boundaries_UK_BUC/"
+    "FeatureServer/0/query"
+    "?where=1%3D1&outFields=CTYUA23CD,CTYUA23NM&outSR=4326&f=geojson"
+    "&resultRecordCount=400&resultOffset=0"
+)
+
 SOURCES: list[dict[str, str]] = [
     # ---------------------------------------------------------------- adult
     {
@@ -267,6 +279,23 @@ SOURCES: list[dict[str, str]] = [
         "licence": "OGL v3.0",
     },
     {
+        "key": "imd_2019_file11",
+        "filename": "imd_2019_file_11_upper_tier_summaries.xlsx",
+        "url": (
+            "https://assets.publishing.service.gov.uk/media/"
+            "5d8b3d7aed915d0369518030/File_11_-_IoD2019_Local_Authority_"
+            "District_Summaries__upper-tier__.xlsx"
+        ),
+        "publisher": "Ministry of Housing, Communities and Local Government",
+        "description": (
+            "English indices of deprivation 2019, File 11, upper tier local "
+            "authority summaries. This is the deprivation score at the same "
+            "geography that adult social care and children's services are run "
+            "at, so no aggregation from districts is needed."
+        ),
+        "licence": "OGL v3.0",
+    },
+    {
         "key": "lad_boundaries_2024_05",
         "filename": "lad_may_2024_boundaries_buc.geojson",
         "url": LAD_BOUNDARY_URL,
@@ -274,6 +303,18 @@ SOURCES: list[dict[str, str]] = [
         "description": (
             "Local Authority Districts, May 2024, ultra generalised clipped "
             "boundaries for the United Kingdom, in GeoJSON."
+        ),
+        "licence": "OGL v3.0",
+    },
+    {
+        "key": "ctyua_boundaries_2023_12",
+        "filename": "ctyua_december_2023_boundaries_buc.geojson",
+        "url": CTYUA_BOUNDARY_URL,
+        "publisher": "Office for National Statistics Open Geography Portal",
+        "description": (
+            "Counties and Unitary Authorities, December 2023, ultra "
+            "generalised clipped boundaries for the United Kingdom, in "
+            "GeoJSON. This is the upper tier geography the choropleths use."
         ),
         "licence": "OGL v3.0",
     },

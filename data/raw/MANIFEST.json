@@ -69,6 +69,16 @@
     "sha256": "dc1072522aec6a50d11cbe5598c61c2ad459abd486b3ee007614f3d10ebdc6ed",
     "url": "https://assets.publishing.service.gov.uk/media/6a42854f5b6406df58c13f78/long-term-support-official-statistics-in-development-data-to-march-2026.ods.ods"
   },
+  "ctyua_boundaries_2023_12": {
+    "bytes": 983195,
+    "description": "Counties and Unitary Authorities, December 2023, ultra generalised clipped boundaries for the United Kingdom, in GeoJSON. This is the upper tier geography the choropleths use.",
+    "downloaded": "2026-09-07",
+    "filename": "ctyua_december_2023_boundaries_buc.geojson",
+    "licence": "OGL v3.0",
+    "publisher": "Office for National Statistics Open Geography Portal",
+    "sha256": "71576bc303149e008867499a6e6737657618de76513bb3aaca49911923735267",
+    "url": "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Counties_and_Unitary_Authorities_December_2023_Boundaries_UK_BUC/FeatureServer/0/query?where=1%3D1&outFields=CTYUA23CD,CTYUA23NM&outSR=4326&f=geojson&resultRecordCount=400&resultOffset=0"
+  },
   "dfe_cin": {
     "bytes": 1187311,
     "description": "Children in need census, all release files. c1 carries referrals and re-referrals, d3 carries second or subsequent child protection plans.",
@@ -108,6 +118,16 @@
     "publisher": "Ministry of Housing, Communities and Local Government",
     "sha256": "e4ade0ca7fa5e00e1f89b6c1ae754cd6561dd777543e04ff8a38cadea10b5366",
     "url": "https://assets.publishing.service.gov.uk/media/5d8b3cfbe5274a08be69aa91/File_10_-_IoD2019_Local_Authority_District_Summaries__lower-tier__.xlsx"
+  },
+  "imd_2019_file11": {
+    "bytes": 152263,
+    "description": "English indices of deprivation 2019, File 11, upper tier local authority summaries. This is the deprivation score at the same geography that adult social care and children's services are run at, so no aggregation from districts is needed.",
+    "downloaded": "2026-09-07",
+    "filename": "imd_2019_file_11_upper_tier_summaries.xlsx",
+    "licence": "OGL v3.0",
+    "publisher": "Ministry of Housing, Communities and Local Government",
+    "sha256": "4bdbc1f2e7fc5bd0e6b15d9cdecd7f7b8fe661c9daf76f0414ac35b2ddab422b",
+    "url": "https://assets.publishing.service.gov.uk/media/5d8b3d7aed915d0369518030/File_11_-_IoD2019_Local_Authority_District_Summaries__upper-tier__.xlsx"
   },
   "lad_boundaries_2024_05": {
     "bytes": 1185884,
