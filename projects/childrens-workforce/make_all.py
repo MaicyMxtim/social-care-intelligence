@@ -157,7 +157,7 @@ def draw_descriptives(panel: pd.DataFrame, findings: dict) -> None:
         turnover_funnel,
         recent.set_index("la_code")["la_name"],
         title=(
-            f"Turnover varies about {turnover_funnel['phi']:.0f} times more between "
+            f"Turnover varies about {turnover_funnel['phi']:.1f} times more between "
             f"councils than chance would produce"
         ),
         subtitle=(

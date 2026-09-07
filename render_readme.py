@@ -34,6 +34,17 @@ def render(adult: dict, children: dict) -> str:
     agency = children["panel_regression"]["rereferral_rate"]["terms"]["agency_rate_lag1"]
 
     manifest_count = len(adult.get("sources", {}))
+    # The direction of the deprivation contrast is read from the data rather than
+    # written in, so the sentence cannot end up saying the opposite of the table.
+    unstable_direction = (
+        "less deprived" if clusters["unstable_imd"] < clusters["other_imd"] else "more deprived"
+    )
+    vacancy = adult["model"]["irr"]["Care workforce vacancy rate"]
+    vacancy_verdict = (
+        "adds nothing once the others are in"
+        if vacancy["low"] <= 1.0 <= vacancy["high"]
+        else f"still moves the rate, at {vacancy['irr']:.2f} times per standard deviation"
+    )
 
     return f"""# Social care intelligence
 
@@ -59,7 +70,7 @@ Across {adult['authorities']} councils the long-term support rate runs from
 {fmt(funnel['phi'], 0)} times more than chance alone would produce. A negative
 binomial model with age structure, deprivation and region explains
 {fmt(model['deviance_explained'] * 100, 0)} per cent of that, the care workforce
-vacancy rate adds nothing once the others are in, and
+vacancy rate {vacancy_verdict}, and
 {panel['persistent']} councils sit outside the limits in almost every one of
 {panel['months']} monthly snapshots rather than occasionally.
 
@@ -81,7 +92,7 @@ risk of a downgrade, though with that few events this is weak evidence rather
 than proof of no effect. Agency reliance does track re-referrals within
 authorities over time, at {fmt(abs(agency['coefficient']), 2)} percentage points
 per point of agency rate. {clusters['unstable_size']} councils form a
-persistently unstable group, and they are less deprived than the rest, so
+persistently unstable group, and they are {unstable_direction} than the rest, so
 instability is not a deprivation story.
 
 [![Agency rate by region](projects/childrens-workforce/outputs/charts/trajectory_agency_rate.png)](projects/childrens-workforce/README.md)
@@ -170,7 +181,7 @@ the loaders and the statistical functions, run `pytest` from the repository root
 | Widest gap | {fmt(rates['ratio_max_min'], 1)}-fold in support rates | {fmt(descriptives['agency_spread_last'], 1)} points between regions on agency use |
 | Variation beyond chance | {fmt(funnel['phi'], 0)} times | {fmt(descriptives['turnover_phi'], 1)} times on turnover |
 | Explained by the model | {fmt(model['deviance_explained'] * 100, 0)} per cent of deviance | within R squared {fmt(children['panel_regression']['rereferral_rate']['r_squared_within'], 3)} |
-| Deprivation gradient | slope index {fmt(inequality['sii'])} per 100,000 | unstable group is the less deprived one |
+| Deprivation gradient | slope index {fmt(inequality['sii'])} per 100,000 | unstable group is the {unstable_direction} one |
 | What does not explain it | care workforce vacancy rate | every workforce measure, for Ofsted downgrades |
 
 ## How this was built
