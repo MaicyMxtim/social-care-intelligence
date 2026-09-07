@@ -6,7 +6,7 @@ expected, the loader was changed and the change recorded below.
 
 ## Geography
 
-### Why upper tier
+### Upper tier geography
 
 Adult social care and children's services are run by upper tier authorities. In
 Office for National Statistics coding those are unitary authorities (E06),
@@ -48,7 +48,7 @@ Six areas reorganised between 2019 and 2023, and the Office for National
 Statistics reissued codes for two metropolitan districts. `src/geography.py`
 translates every source onto one set of codes before anything is joined.
 
-### One old code to one new code
+### Single successor changes
 
 | Old code | Old name | New code | New name | Year |
 | --- | --- | --- | --- | --- |
@@ -66,7 +66,7 @@ Education uses newer codes for those two districts in its 2025 tables than the
 Office for National Statistics uses in the mid-2024 population estimates, so the
 newer codes are mapped back to the ones the population file uses.
 
-### One old code to several new codes
+### Multiple successor changes
 
 | Old code | Old name | New codes | New names | Year |
 | --- | --- | --- | --- | --- |
@@ -77,7 +77,7 @@ Where a county split, the county's figure is carried to each successor for the
 years before the split. That is an approximation, not a measurement, because the
 two successors will not have resembled the county equally.
 
-### Resolving collisions
+### Collision rules
 
 Recoding creates two kinds of collision and they need opposite treatment, which
 `geography.collapse` handles.
@@ -114,7 +114,7 @@ is placed in the wrong statistical region.
 
 ## Client level data
 
-### Coverage of the panel
+### Panel coverage
 
 The specification asked for a panel of quarters back to April 2024. Three
 quarterly releases are published and their monthly windows overlap:

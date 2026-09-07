@@ -52,9 +52,9 @@ Two reproducible analyses of English social care, built only from open data.
 Each one runs end to end from a single command and writes its own README from
 the numbers it produced.
 
-The two projects share a question. Councils differ enormously from one another,
-and those differences get used to judge them. How much of the difference survives
-the explanations a council would offer, and what is actually left to act on?
+Both projects measure how far local authorities differ from one another, and how
+much of that difference remains once the standard explanations are accounted
+for.
 
 ---
 
@@ -102,7 +102,7 @@ instability is not a deprivation story.
 
 ---
 
-## What is here
+## Repository layout
 
 ```
 scripts/download.py          every dataset, from documented URLs, with a hash manifest
@@ -117,7 +117,7 @@ tests/                       loader contracts and statistical behaviour
 docs/DATA_NOTES.md           every decision made about a source file
 ```
 
-## Rules this repository follows
+## Conventions
 
 Every dataset is downloaded by `scripts/download.py` from a published URL. Raw
 files are never edited by hand. `data/raw/MANIFEST.json` records the download
@@ -172,7 +172,7 @@ python scripts/make_all.py
 project on its own, change into its folder and run `python make_all.py`. To check
 the loaders and the statistical functions, run `pytest` from the repository root.
 
-## Headline numbers at a glance
+## Headline numbers
 
 | | Adult social care | Children's workforce |
 | --- | --- | --- |
@@ -184,11 +184,10 @@ the loaders and the statistical functions, run `pytest` from the repository root
 | Deprivation gradient | slope index {fmt(inequality['sii'])} per 100,000 | unstable group is the {unstable_direction} one |
 | What does not explain it | care workforce vacancy rate | every workforce measure, for Ofsted downgrades |
 
-## How this was built
+## Tooling
 
 The analysis, the method choices and the interpretation are mine. The code was
-written with Claude Code as a pair programming tool, which is worth saying
-plainly rather than leaving to be guessed at.
+written with Claude Code as a pair programming tool.
 
 ## Licence
 

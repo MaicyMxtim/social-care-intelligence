@@ -23,9 +23,9 @@ from src import analysis
 def test_funnel_limits_are_monotone_in_population(confidence):
     """Limits must close in on the national rate as the population grows.
 
-    This is the whole point of a funnel plot. A rate measured over a small
-    population moves around more, so its limits must be wider, and a rate
-    measured over a large population must be held to a tighter standard.
+    A rate measured over a small population moves around more, so its limits must
+    be wider. A rate measured over a large population is held to a tighter
+    standard.
     """
     population = np.array([1_000, 10_000, 50_000, 250_000, 1_000_000])
     lower, upper = analysis.poisson_funnel_limits(population, target_rate=1_500.0,
@@ -107,8 +107,7 @@ def test_winsorising_stops_one_outlier_dominating():
 def test_slope_index_is_positive_when_rate_rises_with_deprivation():
     """The sign convention: positive means a higher rate in more deprived areas.
 
-    Every reading of the slope index in the READMEs depends on this, so it is
-    pinned down here rather than left to be remembered.
+    Every reading of the slope index in the READMEs depends on this convention.
     """
     deprivation = pd.Series([5.0, 10.0, 15.0, 20.0, 25.0, 30.0])
     rate = pd.Series([100.0, 120.0, 140.0, 160.0, 180.0, 200.0])

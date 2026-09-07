@@ -1,6 +1,6 @@
-# Children's social work: does workforce instability show up in outcomes later
+# Children's social work workforce instability and outcomes
 
-## The question
+## Question
 
 Children's services depend on holding onto social workers. This project asks
 whether workforce instability in one year, measured by turnover, vacancies,
@@ -9,26 +9,25 @@ Ofsted downgrade, more children re-referred within a year, more children back on
 a second protection plan, and more children moved between placements. The panel
 runs from 2017 to 2025.
 
-## Why this matters
+## Context
 
 An authority that cannot keep social workers is usually described as being at
 risk, and agency reliance in particular is treated as a warning sign. That belief
-drives real decisions about intervention and improvement support. It is worth
-knowing whether the open data bears it out, and where it does not.
+drives real decisions about intervention and improvement support. This project
+tests whether the open data bears it out.
 
-There is a gap that has to be stated at the start rather than buried in the
-limits. No measure of social worker wellbeing exists at local authority level in
-open data. Nothing published by authority records whether social workers feel
+No measure of social worker wellbeing exists at local authority level in open
+data. Nothing published by authority records whether social workers feel
 able to do the job, whether they are burnt out, or whether they intend to leave.
 Sickness absence and agency reliance are used here as proxies, and they are poor
 ones, because a council can have low sickness absence and an exhausted workforce.
 National surveys by the British Association of Social Workers and by the Local
 Government Association do ask those questions, but they report nationally and
-cannot be joined to a council. That absence is itself a finding of this project.
-Any conclusion drawn below about wellbeing is inference from staffing behaviour,
-not measurement of how staff are.
+cannot be joined to a council. The absence of that measure is a finding of this
+project. Any conclusion drawn below about wellbeing is inference from staffing
+behaviour, not measurement of how staff are.
 
-## The data
+## Data
 
 Every file is downloaded by `scripts/download.py` from a published URL, and
 `data/raw/MANIFEST.json` records the download date and a SHA256 hash for each
@@ -60,7 +59,7 @@ workforce size and counts added. Where a carried figure and a real one collide,
 the real one wins. The full mapping is in
 [docs/DATA_NOTES.md](../../docs/DATA_NOTES.md).
 
-## The method
+## Method
 
 ### Descriptives
 
@@ -110,9 +109,9 @@ which measures how much closer an authority sits to its own group than to the
 nearest other group. A score near one means well separated groups and a score
 near zero means the groups barely differ.
 
-## What the analysis found
+## Findings
 
-### Agency reliance rose, peaked and fell, and regions did not converge
+### Agency reliance and turnover over time
 
 Agency use across England peaked in 2023 at
 19.3 per cent of the workforce and stood at
@@ -141,7 +140,7 @@ would produce, and 11 of
 
 ![Funnel plot of turnover](outputs/charts/funnel_turnover.png)
 
-### Workforce instability does not predict an Ofsted downgrade
+### Survival model results
 
 Of 153 authorities followed from their first ILACS inspection,
 24 were downgraded and 129 were not. The model
@@ -157,14 +156,13 @@ uses 876 authority years.
 
 None of the five covariates has an interval that excludes one, so none of them shifts the risk of a downgrade on its own. The test finds no violation, with the smallest p value across 5 terms at 0.13.
 
-This is a null result and it is worth saying so plainly. With
-24 downgrades across the whole period there is not much
-statistical power, so the honest reading is that the open data does not show a
-link, not that no link exists.
+This is a null result. With 24 downgrades across the whole
+period there is not much statistical power. The open data does not show a link,
+which is different from showing that no link exists.
 
 ![Cox hazard ratios](outputs/charts/forest_cox_hazard_ratios.png)
 
-### Agency reliance does move re-referrals
+### Panel regression results
 
 The fixed effects regressions tell a different story from the survival model,
 because they use every authority year rather than only the years around an
@@ -219,7 +217,7 @@ than a real protective effect of agency staff.
 
 Nothing here reaches significance.
 
-### There is a persistently unstable group, and it is not the deprived group
+### Trajectory clusters
 
 The silhouette score picked 2 groups from
 139 authorities with complete trajectories, at
@@ -233,8 +231,8 @@ agency rate of 22.9 per cent against
 18.2 per cent against
 13.5 per cent.
 
-The interesting part is deprivation. The unstable group is less deprived
-than the rest, with a mean deprivation score of
+On deprivation the group runs the other way. The unstable group is
+less deprived than the rest, with a mean deprivation score of
 21.3 against 24.6.
 Persistent workforce instability is therefore not a deprivation story, which
 matters because improvement support is often targeted as though it were.
@@ -276,24 +274,20 @@ Everything here is association within authorities over time. Fixed effects remov
 the confounders that do not change, but they cannot remove a confounder that
 moves alongside both staffing and outcomes.
 
-## So what
+## Implications
 
-Three things follow for a director of children's services.
-
-Agency reliance is worth watching for its own sake, because it is followed by
-more children being re-referred, but it is not a leading indicator of an Ofsted
-downgrade in this data. Using it as one would be reading more into it than the
-evidence supports.
+Agency reliance tracks re-referrals, so it is a reasonable operational measure of
+risk to case continuity. In this data it is not a leading indicator of an Ofsted
+downgrade, and using it as one reads more into it than the evidence supports.
 
 The persistently unstable group is not the deprived group. Improvement support
-aimed at deprivation will miss most of the councils whose workforces have been
+targeted on deprivation will miss most of the councils whose workforces have been
 unstable for eight years.
 
-The missing measure is the important one. Until something records how social
-workers are, rather than how many of them left, every analysis of this kind is
-inferring wellbeing from staffing behaviour. Commissioning a consistent
-authority-level staff survey would do more for this question than any further
-modelling of the data that already exists.
+Nothing in open data records how social workers are, only how many of them left.
+Every analysis of this kind therefore infers wellbeing from staffing behaviour. A
+consistent authority-level staff survey would answer this question better than
+further modelling of the existing data.
 
 ## Reproduce
 
