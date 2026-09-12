@@ -179,10 +179,12 @@ The sheet has one row for every combination of sector, service and job role. The
 loader keeps the whole-area total, meaning all sectors, all services and all job
 roles.
 
-Three councils have no vacancy rate: the Isles of Scilly, Cumberland, and
-Westmorland and Furness. Skills for Care has not yet split its Cumbria figures
-between the two successor councils. Those councils drop out of the adult model
-and stay in the funnel plots.
+Six councils have no vacancy rate after the join. Three are absent from the file
+altogether: the Isles of Scilly, Cumberland, and Westmorland and Furness. Skills
+for Care has not yet split its Cumbria figures between the two successor
+councils. Three more appear in the file with the rate suppressed: West Berkshire,
+Doncaster and Brent. All six drop out of the adult model and stay in the funnel
+plots.
 
 The workbook carries Microsoft information protection labels that openpyxl does
 not recognise and warns about. The warning says nothing about the data and is

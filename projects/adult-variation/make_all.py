@@ -273,10 +273,15 @@ def draw_maps(table: pd.DataFrame) -> None:
     geo = boundaries.merge(table, on="la_code", how="inner", suffixes=("", "_table"))
     geo = geo[geo["la_code"].str.startswith("E")]
 
+    # The regional ranking is read from the data so that the map title cannot
+    # describe a pattern the data does not show.
+    by_region = table.groupby("region")["lts_rate"].mean().sort_values()
+    highest, lowest = by_region.index[-1], by_region.index[0]
+
     plots.choropleth(
         geo,
         column="lts_rate",
-        title="Long-term support rates are highest in the north east and parts of London",
+        title=f"Support rates are highest in the {highest} and lowest in the {lowest}",
         subtitle="Adults receiving long-term support on 31 March 2026, per 100,000 adults.",
         legend_label="Adults supported per 100,000 adults aged 18 and over",
         source=SOURCE_NOTE,
@@ -285,7 +290,7 @@ def draw_maps(table: pd.DataFrame) -> None:
     plots.choropleth(
         geo,
         column="observed_expected",
-        title="Once population and deprivation are accounted for, the pattern breaks up",
+        title="The regional pattern weakens once population and deprivation are accounted for",
         subtitle=(
             "Observed divided by expected support. Blue is more support than "
             "predicted, amber is less."

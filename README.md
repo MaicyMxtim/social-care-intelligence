@@ -1,30 +1,30 @@
 # Social care intelligence
 
-Two reproducible analyses of English social care, built only from open data.
-Each one runs end to end from a single command and writes its own README from
-the numbers it produced.
+This repository holds two analyses of English social care data.
 
-Both projects measure how far local authorities differ from one another, and how
-much of that difference remains once the standard explanations are accounted
-for.
+The first measures how much adult social care support rates vary between local
+authorities, and how much of that variation is explained by age structure,
+deprivation and care workforce vacancies.
+
+The second tests whether instability in the children's social work workforce
+predicts later Ofsted downgrades and worse outcomes for children.
+
+All the data is open and published by government departments. Each project
+downloads its own data and runs from a single command.
 
 ---
 
 ## Project 1: adult social care variation
 
-**How much do local authority long-term adult social care support rates vary once
-age structure, deprivation and care workforce supply are accounted for, and which
-authorities remain outliers?**
-
-Across 153 councils the long-term support rate runs from
+Support rates across the 153 councils run from
 733 to 2,841 adults per 100,000, a
-3.9-fold gap, and councils vary about
-87 times more than chance alone would produce. A negative
-binomial model with age structure, deprivation and region explains
-64 per cent of that, the care workforce
-vacancy rate adds nothing once the others are in, and
-8 councils sit outside the limits in almost every one of
-18 monthly snapshots rather than occasionally.
+3.9-fold gap. Councils vary about
+87 times more than chance would produce. A negative binomial
+model using age structure, deprivation and region explains
+64 per cent of the variation. The care
+workforce vacancy rate has no measurable effect. 8 councils sit
+outside the funnel limits in almost every one of 18 monthly
+snapshots.
 
 [![Funnel plot of long-term support rates](projects/adult-variation/outputs/charts/funnel_long_term_support.png)](projects/adult-variation/README.md)
 
@@ -35,17 +35,14 @@ vacancy rate adds nothing once the others are in, and
 
 ## Project 2: children's social work workforce
 
-**Does children's social work workforce instability predict later Ofsted
-downgrades and worse child outcomes, 2017 to 2025?**
-
-Across 151 councils and 24 Ofsted
-downgrades, no measure of turnover, vacancies, agency use or caseload shifts the
-risk of a downgrade, though with that few events this is weak evidence rather
-than proof of no effect. Agency reliance does track re-referrals within
-authorities over time, at 0.10 percentage points
-per point of agency rate. 66 councils form a
-persistently unstable group, and they are less deprived than the rest, so
-instability is not a deprivation story.
+There were 24 Ofsted downgrades across
+151 councils between 2017 and
+2025. No measure of turnover, vacancies, agency use or
+caseload shifts the risk of a downgrade. With that few events the result carries
+little statistical weight. Agency reliance tracks re-referrals within
+councils over time, at 0.10 percentage points per
+point of agency rate. 66 councils form a persistently
+unstable group, and that group is less deprived than the rest.
 
 [![Agency rate by region](projects/childrens-workforce/outputs/charts/trajectory_agency_rate.png)](projects/childrens-workforce/README.md)
 
@@ -71,30 +68,28 @@ docs/DATA_NOTES.md           every decision made about a source file
 
 ## Conventions
 
-Every dataset is downloaded by `scripts/download.py` from a published URL. Raw
-files are never edited by hand. `data/raw/MANIFEST.json` records the download
-date, size and SHA256 hash of all 17 source files, and a monthly
-GitHub Actions job re-downloads them and opens an issue when a publisher reissues
-one under correction.
+`scripts/download.py` downloads every dataset from a published URL. Raw files
+stay as downloaded. `data/raw/MANIFEST.json` records the download date, size and
+SHA256 hash of all 17 source files. A monthly GitHub Actions job
+re-downloads them and opens an issue if a publisher reissues one under
+correction.
 
-Every project runs end to end from `python make_all.py` inside its own folder. If
-it does not run clean from a fresh clone, it is not done.
+Each project runs from `python make_all.py` inside its own folder, starting from
+a fresh clone.
 
-Every number in every README is generated from that project's
-`outputs/findings.json` by its `render_readme.py`. None is typed by hand, so the
-prose cannot drift away from the analysis.
+The numbers quoted in each README come from that project's
+`outputs/findings.json`, through its `render_readme.py`.
 
-Chart titles state the finding rather than naming the variable, and axis labels
-carry their units.
+Chart titles state the finding. Axis labels carry units.
 
 Where a published file did not match what a loader expected, the loader was
-fixed and the change written down in [docs/DATA_NOTES.md](docs/DATA_NOTES.md).
-Nothing is silenced with a bare `try` and `except`.
+changed and the change recorded in [docs/DATA_NOTES.md](docs/DATA_NOTES.md).
 
 ## Data sources
 
-All open, all published under the Open Government Licence v3.0 except the Skills
-for Care estimates, which are free to reuse with attribution.
+Every source is open. All are published under the Open Government Licence v3.0,
+except the Skills for Care estimates, which are free to reuse with
+attribution.
 
 | Source | Publisher |
 | --- | --- |

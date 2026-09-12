@@ -2,34 +2,32 @@
 
 ## Question
 
-Children's services depend on holding onto social workers. This project asks
-whether workforce instability in one year, measured by turnover, vacancies,
-agency reliance, caseload and sickness absence, predicts worse things later: an
-Ofsted downgrade, more children re-referred within a year, more children back on
-a second protection plan, and more children moved between placements. The panel
-runs from 2017 to 2025.
+This project tests whether instability in the children's social work workforce
+predicts worse results a year later. Instability is measured by turnover,
+vacancies, agency reliance, caseload and sickness absence. The outcomes are an
+Ofsted downgrade, re-referrals within twelve months, repeat child protection
+plans, and children moved between three or more placements. The panel runs from
+2017 to 2025.
 
 ## Context
 
-An authority that cannot keep social workers is usually described as being at
-risk, and agency reliance in particular is treated as a warning sign. That belief
-drives real decisions about intervention and improvement support. This project
-tests whether the open data bears it out.
+An authority that cannot keep social workers is treated as being at risk, and
+agency reliance in particular is read as a warning sign. That belief drives
+decisions about intervention and improvement support. This project tests whether
+the open data supports it.
 
-No measure of social worker wellbeing exists at local authority level in open
-data. Nothing published by authority records whether social workers feel
-able to do the job, whether they are burnt out, or whether they intend to leave.
-Sickness absence and agency reliance are used here as proxies, and they are poor
-ones, because a council can have low sickness absence and an exhausted workforce.
-National surveys by the British Association of Social Workers and by the Local
-Government Association do ask those questions, but they report nationally and
-cannot be joined to a council. The absence of that measure is a finding of this
-project. Any conclusion drawn below about wellbeing is inference from staffing
-behaviour, not measurement of how staff are.
+Open data holds no measure of social worker wellbeing at local authority level.
+Published sources record how many social workers left, not how the remaining ones
+are. Sickness absence and agency reliance are used here as proxies. Both are
+weak, because a council can have low sickness absence and an exhausted workforce.
+The British Association of Social Workers and the Local Government Association
+survey social workers directly, but report at national level, so their results
+cannot be joined to a council. The gap is itself a finding. Every conclusion
+below about wellbeing is inferred from staffing behaviour.
 
 ## Data
 
-Every file is downloaded by `scripts/download.py` from a published URL, and
+`scripts/download.py` downloads every file from a published URL.
 `data/raw/MANIFEST.json` records the download date and a SHA256 hash for each
 one.
 
@@ -116,10 +114,10 @@ near zero means the groups barely differ.
 Agency use across England peaked in 2023 at
 19.3 per cent of the workforce and stood at
 14.8 per cent by 2025.
-The gap between the highest and lowest region went from
+The gap between the highest and lowest region narrowed from
 17.4 to
-13.5 percentage points, so the fall did
-not bring regions together. In 2025 the highest region was
+13.5 percentage points. In
+2025 the highest region was
 South West at
 20.8 per cent and the lowest was
 Yorkshire and The Humber at
@@ -157,16 +155,15 @@ uses 876 authority years.
 None of the five covariates has an interval that excludes one, so none of them shifts the risk of a downgrade on its own. The test finds no violation, with the smallest p value across 5 terms at 0.13.
 
 This is a null result. With 24 downgrades across the whole
-period there is not much statistical power. The open data does not show a link,
-which is different from showing that no link exists.
+period the analysis has limited statistical power. The open data shows no link,
+and an effect of moderate size could still escape detection.
 
 ![Cox hazard ratios](outputs/charts/forest_cox_hazard_ratios.png)
 
 ### Panel regression results
 
-The fixed effects regressions tell a different story from the survival model,
-because they use every authority year rather than only the years around an
-inspection.
+The fixed effects regressions use every authority year, rather than only the
+years around an inspection.
 
 **Re-referrals within twelve months** (1156 authority years,
 150 authorities, within R squared
@@ -183,8 +180,8 @@ inspection.
 A one percentage point rise in an authority's agency rate is followed by a
 0.099 percentage point
 rise in its
-re-referral rate the next year. That is a small effect, but it is measured within
-authorities, so it is not a comparison between different kinds of council.
+re-referral rate the next year. The effect is small. It is measured within
+authorities, so it compares a council against itself over time.
 
 **Repeat child protection plans** (1150 authority years,
 151 authorities, within R squared
@@ -199,10 +196,9 @@ authorities, so it is not a comparison between different kinds of council.
 | Vacancy rate | +0.053 | -0.014 to +0.121 | 0.122 |
 
 Agency reliance points the other way here, at
--0.072 percentage points. Two effects in opposite
-directions from the same covariate is a reason for caution rather than a finding
-to build on, and it is more likely to reflect how councils record repeat plans
-than a real protective effect of agency staff.
+-0.072 percentage points. The same covariate moving
+two outcomes in opposite directions calls for caution. The likeliest explanation
+is a difference in how councils record repeat plans.
 
 **Children with three or more placements** (707 authority years,
 146 authorities):
@@ -215,7 +211,7 @@ than a real protective effect of agency staff.
 | Turnover rate | -0.019 | -0.048 to +0.009 | 0.188 |
 | Vacancy rate | +0.012 | -0.034 to +0.059 | 0.602 |
 
-Nothing here reaches significance.
+No covariate reaches significance.
 
 ### Trajectory clusters
 
@@ -234,8 +230,9 @@ agency rate of 22.9 per cent against
 On deprivation the group runs the other way. The unstable group is
 less deprived than the rest, with a mean deprivation score of
 21.3 against 24.6.
-Persistent workforce instability is therefore not a deprivation story, which
-matters because improvement support is often targeted as though it were.
+Persistent workforce instability therefore tracks something other than
+deprivation, which matters because improvement support is often targeted on
+deprivation.
 
 ![Map of the persistent instability group](outputs/charts/map_workforce_clusters.png)
 
@@ -244,9 +241,9 @@ matters because improvement support is often targeted as though it were.
 ## Limits
 
 No authority-level measure of social worker wellbeing exists in open data.
-Sickness absence and agency reliance stand in for it and they are weak proxies.
-The BASW and LGA social worker surveys ask the right questions but report
-nationally, so they can provide context and nothing more.
+Sickness absence and agency reliance stand in for it, and both are weak proxies.
+The BASW and LGA social worker surveys ask the right questions but report at
+national level, so they serve as context only.
 
 Ofsted downgrades are rare. 24 events across the period is
 enough to fit a model but not enough to detect a modest effect, so the null

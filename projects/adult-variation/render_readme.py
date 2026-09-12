@@ -56,7 +56,7 @@ def render(findings: dict) -> str:
     )
 
     vacancy_verdict = (
-        "cannot be separated from no effect"
+        "has no measurable effect"
         if vacancy["low"] <= 1.0 <= vacancy["high"]
         else "changes the rate"
     )
@@ -66,34 +66,32 @@ def render(findings: dict) -> str:
 ## Question
 
 Local authorities in England support very different shares of their adult
-population. Some of that difference is expected, because authorities differ in
-how old their populations are, how deprived they are, and how easy it is to
-recruit care workers locally. This project asks how much variation is left once
-those three things are accounted for, and which authorities remain outliers when
-they are.
+population. Some of that difference is expected. Authorities differ in how old
+their populations are, how deprived they are, and how easily they can recruit
+care workers. This project measures how much variation remains once those three
+things are accounted for, and identifies the authorities that are still
+outliers.
 
 ## Context
 
 Client level data is the first record-level national collection covering adult
-social care in England. Councils have been required to submit it since April
-2023, and it now feeds the Activity and Finance Report and six measures in the
-Adult Social Care Outcomes Framework. That makes it the first dataset capable of
-supporting this kind of comparison, and it means answers drawn from it will
-increasingly shape how councils are judged.
+social care in England. Councils have submitted it since April 2023. It now feeds
+the Activity and Finance Report and six measures in the Adult Social Care
+Outcomes Framework. Comparisons drawn from it will increasingly shape how
+councils are judged.
 
-The timing matters too. The Casey Commission timetable was accelerated during
-2026, so questions about which councils are outliers and why are being asked
-under pressure. Hospital discharge pressure pushes in the same direction,
-because a council that cannot arrange long-term support quickly becomes a
-constraint on the health service as well as on its own residents. A council
-named as an outlier deserves to know whether the finding survives adjustment for
-the things it cannot control.
+The Casey Commission timetable was accelerated during 2026, so these comparisons
+are being made under time pressure. Hospital discharge adds to that pressure. A
+council that cannot arrange long-term support quickly constrains the health
+service as well as its own residents. Councils identified as outliers need to
+know whether the finding survives adjustment for factors outside their
+control.
 
 ## Data
 
-Every file is downloaded by `scripts/download.py` from a published URL, and
+`scripts/download.py` downloads every file from a published URL.
 `data/raw/MANIFEST.json` records the download date and a SHA256 hash for each
-one. Nothing is edited by hand.
+one. Raw files stay as downloaded.
 
 | Source | Publisher | What it provides |
 | --- | --- | --- |
@@ -203,17 +201,17 @@ median is {fmt(rates['median'])} and the middle half of councils fall between
 {fmt(funnel['target_rate'])} per 100,000.
 
 Before any adjustment, {funnel['outside_unadjusted']} of {funnel['n']} councils
-sit outside the 99.8 per cent Poisson limits. The differences between councils
-are therefore not sampling noise. The dispersion ratio is
+sit outside the 99.8 per cent Poisson limits. Sampling error alone cannot
+account for a spread that wide. The dispersion ratio is
 {fmt(funnel['phi'], 1)}, so councils vary roughly {fmt(funnel['phi'], 0)} times
 more than chance alone would produce.
 
 Once the limits are widened by that amount, {funnel['outside_998']} council sits
 outside the 99.8 per cent limits and {funnel['outside_95']} sit outside the 95 per
 cent limits. The chart below shows both sets of limits. The overdispersion
-adjustment asks whether a council is unusual compared with how much councils
-actually differ, rather than compared with chance, and on that test almost none
-is.
+adjustment compares each council against how much councils actually differ,
+instead of against chance. On that basis almost every council falls inside the
+limits.
 
 {funnel['highest_name']} has the highest rate at {fmt(funnel['highest_rate'])} per
 100,000 and {funnel['lowest_name']} the lowest at {fmt(funnel['lowest_rate'])}.
@@ -223,9 +221,9 @@ is.
 Assessments vary far more. The England assessment rate is
 {fmt(assess['target_rate'])} per 100,000 adults over the year, and the dispersion
 ratio is {fmt(assess['phi'], 0)}, which is several times the ratio for support.
-A spread that wide is unlikely to describe need alone. Councils are probably not
-yet recording an assessment in the same way as each other. Any assessment based
-comparison between councils should wait until they are.
+A spread that wide is unlikely to describe need alone. Councils probably record
+an assessment in different ways. Comparisons between councils on any assessment
+based measure should wait until recording practice converges.
 
 ![Funnel plot of assessment rates](outputs/charts/funnel_assessments.png)
 
@@ -254,7 +252,8 @@ parameter of {fmt(model['alpha'], 4)} and explains
 
 The care workforce vacancy rate {vacancy_verdict}. Vacancy pressure is often
 offered as an explanation for why councils differ in how many people they
-support. At this level of aggregation it does not carry that weight.
+support. At this level of aggregation the data gives that explanation no
+support.
 
 ![Forest plot of incidence rate ratios](outputs/charts/forest_incidence_rate_ratios.png)
 
@@ -269,8 +268,8 @@ many. {model['oe_above_1_2']} councils are more than a fifth above prediction an
 
 ![Councils furthest from their expected support level](outputs/charts/observed_expected_extremes.png)
 
-The raw rate map shows a recognisable geography. The observed to expected map
-does not.
+The raw rate map shows a clear north to south gradient. On the observed to
+expected map, councils above and below prediction appear in every region.
 
 ![Map of raw support rates](outputs/charts/map_support_rate.png)
 
@@ -318,7 +317,7 @@ approximation.
 
 ## Implications
 
-Being an outlier on the raw rate is not by itself evidence of anything. Roughly a
+An outlier on the raw rate needs adjustment before it means anything. Roughly a
 third of the raw gap between councils survives adjustment for age structure,
 deprivation and region.
 
@@ -383,24 +382,23 @@ def render_brief(findings: dict) -> str:
 Long-term support rates across the {findings['authorities']} English councils run
 from {fmt(rates['min'])} to {fmt(rates['max'])} per 100,000 adults, a
 {fmt(rates['ratio_max_min'], 1)}-fold gap. Councils vary about
-{fmt(funnel['phi'], 0)} times more than chance alone would produce, so raw
-comparisons between councils are not measuring noise.
+{fmt(funnel['phi'], 0)} times more than chance alone would produce. Sampling
+error alone cannot account for that spread.
 
 A negative binomial model with age structure, deprivation and region explains
 {fmt(model['deviance_explained'] * 100, 0)} per cent of that variation.
 Deprivation is the strongest single factor, at {fmt(deprivation['irr'], 2)} times
-the rate per standard deviation. The care workforce vacancy rate adds nothing
-once the others are in ({fmt(vacancy['irr'], 2)}, interval
-{fmt(vacancy['low'], 2)} to {fmt(vacancy['high'], 2)}).
+the rate per standard deviation. The care workforce vacancy rate has no
+measurable effect ({fmt(vacancy['irr'], 2)}, interval {fmt(vacancy['low'], 2)} to
+{fmt(vacancy['high'], 2)}).
 
 Unexplained variation remains wide, from {fmt(model['oe_min'], 2)} to
 {fmt(model['oe_max'], 2)} times predicted. Over {panel['months']} monthly
-snapshots, {panel['persistent']} councils sit outside the limits in almost every
-month rather than occasionally.
+snapshots, {panel['persistent']} councils sit outside the limits in at least four
+fifths of months.
 
-**Recommendation.** Treat persistence, not a single month, as the trigger for
-review, and look at eligibility thresholds rather than workforce supply when
-explaining a low rate.
+**Recommendation.** Use sustained position outside the limits as the trigger for
+review, and look first at eligibility thresholds when explaining a low rate.
 """
 
 
