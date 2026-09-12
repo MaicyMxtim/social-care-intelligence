@@ -184,11 +184,6 @@ the loaders and the statistical functions, run `pytest` from the repository root
 | Deprivation gradient | slope index {fmt(inequality['sii'])} per 100,000 | unstable group is the {unstable_direction} one |
 | What does not explain it | care workforce vacancy rate | every workforce measure, for Ofsted downgrades |
 
-## Tooling
-
-The analysis, the method choices and the interpretation are mine. The code was
-written with Claude Code as a pair programming tool.
-
 ## Licence
 
 Code is released under the MIT licence. The source data stays under the licences
