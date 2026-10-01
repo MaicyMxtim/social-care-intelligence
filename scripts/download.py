@@ -21,6 +21,7 @@ import argparse
 import hashlib
 import json
 import sys
+import re
 from datetime import date
 from pathlib import Path
 
@@ -190,6 +191,10 @@ SOURCES: list[dict[str, str]] = [
             "https://content.explore-education-statistics.service.gov.uk/"
             "api/releases/54642595-7462-42ba-b565-08de4c5bcb90/files"
         ),
+        "release_page": (
+            "https://explore-education-statistics.service.gov.uk/"
+            "find-statistics/children-s-social-work-workforce/2025"
+        ),
         "publisher": "Department for Education",
         "description": (
             "Children's social work workforce statistics, all release files. "
@@ -203,7 +208,11 @@ SOURCES: list[dict[str, str]] = [
         "filename": "dfe_children_in_need.zip",
         "url": (
             "https://content.explore-education-statistics.service.gov.uk/"
-            "api/releases/9d18dcc5-207b-43d3-c0e1-08ddff5126a0/files"
+            "api/releases/9e627de0-ba01-442f-b6cf-f77d026a2ed3/files"
+        ),
+        "release_page": (
+            "https://explore-education-statistics.service.gov.uk/"
+            "find-statistics/children-in-need/2025"
         ),
         "publisher": "Department for Education",
         "description": (
@@ -219,6 +228,10 @@ SOURCES: list[dict[str, str]] = [
         "url": (
             "https://content.explore-education-statistics.service.gov.uk/"
             "api/releases/8c28aca0-6ab9-400b-b7de-c5fc7a148c2e/files"
+        ),
+        "release_page": (
+            "https://explore-education-statistics.service.gov.uk/"
+            "find-statistics/children-looked-after-in-england-including-adoptions/2025"
         ),
         "publisher": "Department for Education",
         "description": (
@@ -347,6 +360,22 @@ def fetch(url: str, destination: Path) -> None:
     temporary.replace(destination)
 
 
+def resolve_release_download(release_page: str) -> str:
+    """Return the current "download all data" URL from a DfE release page.
+
+    Explore Education Statistics addresses its zip downloads by release version,
+    and an amendment retires the old version id, after which its URL answers 406
+    or 404. The release page for a given reporting year always links the current
+    version of that year, so it is the fallback when a pinned URL stops working.
+    """
+    response = requests.get(release_page, headers={"User-Agent": USER_AGENT}, timeout=TIMEOUT_SECONDS)
+    response.raise_for_status()
+    match = re.search(r'id="download-all-data-link"[^>]*href="([^"?]+)', response.text)
+    if match is None:
+        raise RuntimeError(f"no download-all-data link found on {release_page}")
+    return match.group(1)
+
+
 def fetch_paged_geojson(url: str, destination: Path) -> None:
     """Download an ArcGIS feature service layer, following its paging.
 
@@ -422,7 +451,18 @@ def main() -> int:
             if source["filename"].endswith(".geojson"):
                 fetch_paged_geojson(source["url"], path)
             else:
-                fetch(source["url"], path)
+                try:
+                    fetch(source["url"], path)
+                except requests.HTTPError as error:
+                    if "release_page" not in source or error.response.status_code not in (404, 406):
+                        raise
+                    source["url"] = resolve_release_download(source["release_page"])
+                    print(
+                        f"         pinned URL retired, using {source['url']} "
+                        f"(update SOURCES in {Path(__file__).name})",
+                        flush=True,
+                    )
+                    fetch(source["url"], path)
         manifest[source["key"]] = {
             "filename": source["filename"],
             "url": source["url"],
